@@ -1,0 +1,49 @@
+{
+  "requiredAssets": 69,
+  "presentAssets": 69,
+  "photographicAssets": 26,
+  "illustrations": 8,
+  "problems": [],
+  "illustrationChecks": [
+    {
+      "path": "/images/illustration/illo-overwhelm.svg",
+      "greenCoverage": 0,
+      "transparent": true
+    },
+    {
+      "path": "/images/illustration/illo-starting-line.svg",
+      "greenCoverage": 0.00779140625,
+      "transparent": true
+    },
+    {
+      "path": "/images/illustration/illo-diagonal-rider.svg",
+      "greenCoverage": 0.07803713683223992,
+      "transparent": true
+    },
+    {
+      "path": "/images/illustration/illo-step-01-listen.svg",
+      "greenCoverage": 0.013369921875,
+      "transparent": true
+    },
+    {
+      "path": "/images/illustration/illo-step-02-match.svg",
+      "greenCoverage": 0.078311328125,
+      "transparent": true
+    },
+    {
+      "path": "/images/illustration/illo-step-03-continue.svg",
+      "greenCoverage": 0.0001640625,
+      "transparent": true
+    },
+    {
+      "path": "/images/illustration/illo-empty-appointments.svg",
+      "greenCoverage": 0.010813671875,
+      "transparent": true
+    },
+    {
+      "path": "/images/illustration/illo-404.svg",
+      "greenCoverage": 0.00051796875,
+      "transparent": true
+    }
+  ]
+}

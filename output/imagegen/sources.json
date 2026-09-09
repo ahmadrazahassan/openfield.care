@@ -1,0 +1,147 @@
+[
+  {
+    "id": "A1",
+    "path": "public/images/hero/hero-open-field.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-40405f3b-3b13-4802-a4c6-66d5d3f6b2e2.png"
+  },
+  {
+    "id": "A2",
+    "path": "public/images/hero/hero-consult-room.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-f24c7dfd-c3b6-4318-b0da-3275de94c044.png"
+  },
+  {
+    "id": "A3",
+    "path": "public/images/editorial/editorial-bigtype-field.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-baabeb3c-0959-4f48-8abe-6289a79b2ffd.png"
+  },
+  {
+    "id": "A4",
+    "path": "public/images/editorial/editorial-footer-field.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-846c777c-059c-4d6b-847a-1003347a1517.png"
+  },
+  {
+    "id": "A5",
+    "path": "public/images/editorial/editorial-window-light.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-223fd89b-3557-41a3-bf3f-46fce4419807.png"
+  },
+  {
+    "id": "A6",
+    "path": "public/images/editorial/editorial-two-chairs.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-a770bc68-a436-483b-83de-dc3c13569146.png"
+  },
+  {
+    "id": "B1",
+    "path": "public/images/illustration/illo-overwhelm.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-31147f11-de62-4d50-b028-b97263979273.png"
+  },
+  {
+    "id": "B2",
+    "path": "public/images/illustration/illo-starting-line.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-8a7f2730-6ef6-4d15-a9ff-9bf40c1b8ff4.png"
+  },
+  {
+    "id": "B3",
+    "path": "public/images/illustration/illo-diagonal-rider.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-0a3147ca-77d5-4e27-9c02-e5d5874e0f2c.png"
+  },
+  {
+    "id": "B4",
+    "path": "public/images/illustration/illo-step-01-listen.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-ab6ed598-81e1-4e8c-9260-a9760615e1bd.png"
+  },
+  {
+    "id": "B5",
+    "path": "public/images/illustration/illo-step-02-match.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-e9c24243-add9-47dc-81e8-d9467deec9a7.png"
+  },
+  {
+    "id": "B6",
+    "path": "public/images/illustration/illo-step-03-continue.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-082bc82c-5c9f-4da4-a5e3-30cda7ddbd8d.png"
+  },
+  {
+    "id": "B7",
+    "path": "public/images/illustration/illo-empty-appointments.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-8655db82-ef5c-45e0-954f-90a4aa20040c.png"
+  },
+  {
+    "id": "B8",
+    "path": "public/images/illustration/illo-404.svg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-36fe7037-7232-46e2-b807-a3fff83a5d0b.png"
+  },
+  {
+    "id": "C1",
+    "path": "public/images/editorial/editorial-tangled-thoughts.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-28b77536-fb82-4e6b-9bf6-0c28273f07fc.png"
+  },
+  {
+    "id": "C2",
+    "path": "public/images/editorial/editorial-loose-thread.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-105d53d2-e835-4426-87e8-e83bf4c6ca93.png"
+  },
+  {
+    "id": "J01",
+    "path": "public/images/journal/journal-01.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-0b31f483-d690-44f4-87c3-978acdc0ef7c.png"
+  },
+  {
+    "id": "J02",
+    "path": "public/images/journal/journal-02.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-1e21c39e-5046-4dbe-8de4-f3f5d74586d6.png"
+  },
+  {
+    "id": "J03",
+    "path": "public/images/journal/journal-03.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-e3436db0-8770-4d37-b5be-97a849326697.png"
+  },
+  {
+    "id": "J04",
+    "path": "public/images/journal/journal-04.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-4093a179-f9a3-483d-a7e3-7156ad6ae925.png"
+  },
+  {
+    "id": "J05",
+    "path": "public/images/journal/journal-05.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-c484a9f5-6f47-4ccb-a666-54410174c5e9.png"
+  },
+  {
+    "id": "J06",
+    "path": "public/images/journal/journal-06.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-0473e7a1-5b63-4aab-be8b-8fd65c6bd75a.png"
+  },
+  {
+    "id": "F1",
+    "path": "public/images/team/therapist-01.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-77542a64-cefb-431d-a028-200c2df8267d.png"
+  },
+  {
+    "id": "F2",
+    "path": "public/images/team/therapist-02.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-9c2ff2f0-589d-4572-9ce4-ca7fcace4e93.png"
+  },
+  {
+    "id": "F3",
+    "path": "public/images/team/therapist-03.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-5ced93f4-258f-4e92-9869-4a9fffe5e75b.png"
+  },
+  {
+    "id": "F4",
+    "path": "public/images/team/therapist-04.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-918bc84d-ad0e-4926-8907-19b3f85e35e2.png"
+  },
+  {
+    "id": "F5",
+    "path": "public/images/team/therapist-05.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-b55e9be4-740c-416e-ad35-0f0031c0e5ad.png"
+  },
+  {
+    "id": "F6",
+    "path": "public/images/team/therapist-06.jpg",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-c0eb3ae9-a267-4744-b187-f853b90a1d9b.png"
+  },
+  {
+    "id": "G1",
+    "path": "public/images/texture/texture-torn-edge.png",
+    "source": "C:\\Users\\Ahmed\\.codex\\generated_images\\01a0812b-dd1d-7990-9c67-c4ef3d8f693a\\exec-cbc41ca7-4d8f-4332-a608-319c8ae3d1cf.png"
+  }
+]

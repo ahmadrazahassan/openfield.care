@@ -1,0 +1,15 @@
+project_id = "uxjfzgkllqjqsdhnmiwa"
+
+[functions.appointments-to-sheets]
+enabled = true
+entrypoint = "./functions/appointments-to-sheets/index.js"
+import_map = "./functions/appointments-to-sheets/deno.json"
+# The function validates the private CRON_SECRET itself; an ordinary Supabase
+# public/anonymous JWT is deliberately insufficient to trigger a sync.
+verify_jwt = false
+
+[functions.send-appointment-email]
+enabled = true
+entrypoint = "./functions/send-appointment-email/index.js"
+import_map = "./functions/send-appointment-email/deno.json"
+verify_jwt = false
