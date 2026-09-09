@@ -4,6 +4,7 @@ import { Reveal } from "./Reveal";
 import { KnotResolve } from "./KnotResolve";
 import { HOME } from "@/content/copy";
 import { PHOTO, TEXTURE } from "@/content/assets";
+import { BlurText } from "./BlurText";
 
 /**
  * The brand moment: the only dark section, the only monochrome image, the only
@@ -35,9 +36,9 @@ export function TangledBand() {
 
           <div className="lg:col-span-6 lg:col-start-7">
             <Reveal>
-              <h2 className="text-d2 max-w-[16ch] text-page">
+              <BlurText as="h2" className="text-d2 max-w-[16ch] text-page">
                 {HOME.tangled.heading}
-              </h2>
+              </BlurText>
               <p className="mt-7 measure text-lead text-page-70">
                 {HOME.tangled.body}
               </p>

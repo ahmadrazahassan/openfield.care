@@ -7,6 +7,7 @@ import { IconFor, ArrowUpRightIcon } from "@/components/icons";
 import { HOME } from "@/content/copy";
 import { CONCERNS } from "@/content/data";
 import { ILLUSTRATION, IMAGE_QUALITY } from "@/content/assets";
+import { BlurText } from "./BlurText";
 
 /**
  * What we help with.
@@ -29,9 +30,9 @@ export function ConcernIndex() {
                 <Eyebrow className="text-ink-55">
                   {HOME.concerns.eyebrow}
                 </Eyebrow>
-                <h2 className="mt-5 max-w-[14ch] text-d2">
+                <BlurText as="h2" className="mt-5 max-w-[14ch] text-d2">
                   {HOME.concerns.heading}
-                </h2>
+                </BlurText>
                 <p className="mt-6 max-w-[38ch] text-ink-70">
                   {HOME.concerns.lead}
                 </p>

@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { InsetMedia, Scrim } from "@/components/layout/primitives";
 import { ArrowUpRightIcon } from "@/components/icons";
+import { BlurText } from "./BlurText";
+import { ScrollMedia } from "./ScrollMedia";
 import { HOME } from "@/content/copy";
 import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 
@@ -26,30 +28,32 @@ export function Hero() {
   return (
     <section className="pt-2 md:pt-3" aria-labelledby="hero-heading">
       <InsetMedia className="min-h-[min(84vh,820px)]">
-        {/* Landscape */}
-        <Image
-          src={photo.src}
-          alt={photo.alt}
-          fill
-          priority
-          sizes={INSET_SIZES}
-          quality={IMAGE_QUALITY.hero}
-          placeholder={photo.blurDataURL ? "blur" : "empty"}
-          blurDataURL={photo.blurDataURL}
-          className="-z-20 hidden object-cover object-center sm:block"
-        />
-        {/* Portrait crop, centred on the figure */}
-        <Image
-          src={mobile.src}
-          alt={mobile.alt}
-          fill
-          priority
-          sizes={INSET_SIZES}
-          quality={IMAGE_QUALITY.hero}
-          placeholder={mobile.blurDataURL ? "blur" : "empty"}
-          blurDataURL={mobile.blurDataURL}
-          className="-z-20 object-cover object-center sm:hidden"
-        />
+        <ScrollMedia travel={6}>
+          {/* Landscape */}
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            priority
+            sizes={INSET_SIZES}
+            quality={IMAGE_QUALITY.hero}
+            placeholder={photo.blurDataURL ? "blur" : "empty"}
+            blurDataURL={photo.blurDataURL}
+            className="-z-20 hidden object-cover object-center sm:block"
+          />
+          {/* Portrait crop, centred on the figure */}
+          <Image
+            src={mobile.src}
+            alt={mobile.alt}
+            fill
+            priority
+            sizes={INSET_SIZES}
+            quality={IMAGE_QUALITY.hero}
+            placeholder={mobile.blurDataURL ? "blur" : "empty"}
+            blurDataURL={mobile.blurDataURL}
+            className="-z-20 object-cover object-center sm:hidden"
+          />
+        </ScrollMedia>
         {/* Flat layer, never a gradient. Grass is mid-tone, so white type
             needs help to clear AA contrast. */}
         <Scrim strong />
@@ -75,12 +79,16 @@ export function Hero() {
 
           {/* ── The headline ────────────────────────────────────────── */}
           <div className="mt-8 md:mt-10">
-            <h1
+            <BlurText
+              as="h1"
               id="hero-heading"
               className="text-center font-display text-mega text-on-image"
+              blur={16}
+              stagger={0.09}
+              delay={0.15}
             >
               {hero.headline}
-            </h1>
+            </BlurText>
 
             {/* Arrow link, right-aligned under the headline */}
             <div className="mt-4 flex justify-center md:mt-5 md:justify-end md:pr-[6%]">

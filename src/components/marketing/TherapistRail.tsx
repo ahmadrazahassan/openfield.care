@@ -6,6 +6,7 @@ import { TherapistCard } from "./TherapistCard";
 import { ArrowRightIcon } from "@/components/icons";
 import { HOME } from "@/content/copy";
 import { getTherapists } from "@/lib/queries";
+import { BlurText } from "./BlurText";
 
 export async function TherapistRail() {
   const people = (await getTherapists()).slice(0, 4);
@@ -20,9 +21,9 @@ export async function TherapistRail() {
               <Eyebrow className="text-ink-55">
                 {HOME.therapists.eyebrow}
               </Eyebrow>
-              <h2 className="mt-4 text-d2 max-w-[18ch]">
+              <BlurText as="h2" className="mt-4 text-d2 max-w-[18ch]">
                 {HOME.therapists.heading}
-              </h2>
+              </BlurText>
             </div>
             <Link
               href={HOME.therapists.link.href}

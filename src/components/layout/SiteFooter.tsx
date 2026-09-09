@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Logo } from "./Logo";
 import { Container, Scrim } from "./primitives";
 import { TornEdge } from "./TornEdge";
+import { ScrollMedia } from "@/components/marketing/ScrollMedia";
 import { FOOTER_NAV, SITE } from "@/content/site";
 import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 
@@ -17,16 +18,18 @@ export function SiteFooter() {
           <TornEdge />
         </div>
 
-        <Image
-          src={photo.src}
-          alt=""
-          fill
-          sizes="100vw"
-          quality={IMAGE_QUALITY.max}
-          placeholder={photo.blurDataURL ? "blur" : "empty"}
-          blurDataURL={photo.blurDataURL}
-          className="-z-20 object-cover object-bottom"
-        />
+        <ScrollMedia travel={5}>
+          <Image
+            src={photo.src}
+            alt=""
+            fill
+            sizes="100vw"
+            quality={IMAGE_QUALITY.max}
+            placeholder={photo.blurDataURL ? "blur" : "empty"}
+            blurDataURL={photo.blurDataURL}
+            className="-z-20 object-cover object-bottom"
+          />
+        </ScrollMedia>
         <Scrim strong />
 
         <Container className="on-dark relative z-10 flex h-full flex-col pt-10 md:pt-14">

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { BlurText } from "./BlurText";
 
 /** Micro-caps label. Montserrat Alternates, 0.14em tracking, uppercase. */
 export function Eyebrow({
@@ -57,15 +58,28 @@ export function SectionHeading({
           {eyebrow}
         </Eyebrow>
       )}
-      <Tag
-        className={cn(
-          "text-d2 max-w-[18ch]",
-          align === "center" && "max-w-[22ch]",
-          tone === "page" ? "text-page" : "text-ink",
-        )}
-      >
-        {children}
-      </Tag>
+      {typeof children === "string" ? (
+        <BlurText
+          as={Tag}
+          className={cn(
+            "text-d2 max-w-[18ch]",
+            align === "center" && "max-w-[22ch]",
+            tone === "page" ? "text-page" : "text-ink",
+          )}
+        >
+          {children}
+        </BlurText>
+      ) : (
+        <Tag
+          className={cn(
+            "text-d2 max-w-[18ch]",
+            align === "center" && "max-w-[22ch]",
+            tone === "page" ? "text-page" : "text-ink",
+          )}
+        >
+          {children}
+        </Tag>
+      )}
       {lead && (
         <p
           className={cn(

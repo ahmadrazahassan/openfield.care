@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { InsetMedia, Scrim } from "@/components/layout/primitives";
+import { ScrollMedia } from "./ScrollMedia";
 import { HOME } from "@/content/copy";
 import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 
@@ -15,16 +16,18 @@ export function BigTypeBand() {
   return (
     <section className="py-4 md:py-6" aria-labelledby="bigtype-heading">
       <InsetMedia className="min-h-[70vh]">
-        <Image
-          src={photo.src}
-          alt={photo.alt}
-          fill
-          sizes={"(min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"}
-          quality={IMAGE_QUALITY.hero}
-          placeholder={photo.blurDataURL ? "blur" : "empty"}
-          blurDataURL={photo.blurDataURL}
-          className="-z-20 object-cover object-center"
-        />
+        <ScrollMedia travel={7}>
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes={"(min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"}
+            quality={IMAGE_QUALITY.hero}
+            placeholder={photo.blurDataURL ? "blur" : "empty"}
+            blurDataURL={photo.blurDataURL}
+            className="-z-20 object-cover object-center"
+          />
+        </ScrollMedia>
         <Scrim />
 
         <div className="on-dark relative flex min-h-[70vh] flex-col justify-between px-5 py-10 sm:px-8 md:py-14 lg:px-12">

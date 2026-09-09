@@ -12,6 +12,7 @@ import {
 import { portraitFor, PRACTICE_CARDS, IMAGE_QUALITY } from "@/content/assets";
 import { cn } from "@/lib/utils";
 import type { ServiceRow, TherapistRow } from "@/types/database.types";
+import { BlurText } from "./BlurText";
 
 export type WeekOpening = {
   /** ISO date — the React key. Narrow weekday labels repeat (T, T, S, S). */
@@ -127,9 +128,9 @@ export function PracticeBento({ services, therapists, week }: Props) {
       <Container>
         <Reveal className="flex flex-col items-center text-center">
           <Eyebrow className="text-ink-55">The practice, in numbers</Eyebrow>
-          <h2 className="mt-5 max-w-[18ch] text-d2">
+          <BlurText as="h2" className="mt-5 max-w-[18ch] text-d2">
             Everything here is live, not marketing.
-          </h2>
+          </BlurText>
           <p className="mt-5 measure-lead text-lead text-ink-70">
             These figures come straight from the booking system. If a slot shows
             as open, it is open right now.

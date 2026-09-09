@@ -6,6 +6,7 @@ import { Reveal } from "./Reveal";
 import { CheckIcon } from "@/components/icons";
 import { HOME } from "@/content/copy";
 import { ILLUSTRATION, IMAGE_QUALITY } from "@/content/assets";
+import { BlurText } from "./BlurText";
 
 /**
  * The diagonal split.
@@ -31,9 +32,9 @@ export function ForTeamsDiagonal() {
           <div className="lg:col-span-6">
             <Reveal>
               <Eyebrow className="text-page/60">{forTeams.eyebrow}</Eyebrow>
-              <h2 className="mt-4 max-w-[16ch] text-d2 text-page">
+              <BlurText as="h2" className="mt-4 max-w-[16ch] text-d2 text-page">
                 {forTeams.heading}
-              </h2>
+              </BlurText>
               <p className="mt-6 measure text-lead text-page/75">
                 {forTeams.body}
               </p>

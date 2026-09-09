@@ -103,6 +103,16 @@ the wordmark).
 House rules, enforced in review: no gradients, no shadows beyond one elevation
 token, no sparkle/zap/bot iconography, no emoji.
 
+### Motion
+
+- `BlurText` / `BlurIn` — word-by-word blur reveal on scroll-in, fires once.
+- `ScrollMedia` — scroll-linked parallax on full-bleed photography.
+- `Reveal` — plain fade/rise for blocks that are not text.
+
+All three collapse to a static end state under `prefers-reduced-motion`, and
+the text is real DOM content so it reads correctly if the animation never
+runs.
+
 ---
 
 ## Assets

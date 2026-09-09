@@ -267,7 +267,29 @@ Only these four use `--shadow-float`: dropdown menu, popover/date picker, dialog
 | Page transition | 180ms cross-fade on `main` |
 | Number counters | count up over 900ms, once, on first view (hero stat only) |
 
-**Banned:** parallax, scroll-jacking, marquee-on-scroll velocity, text scrambling, cursor followers, magnetic buttons, 3D tilt, blur-in, auto-playing carousels.
+**Scroll reveals — revised on client direction; supersedes the original ban on
+blur-in and parallax:**
+
+| Element | Motion |
+|---|---|
+| Headings | Word-by-word blur reveal: `blur(10px)→0`, opacity `0→1`, `y 0.25em→0`, 700ms, 55ms stagger, once |
+| Hero headline | Same, `blur(16px)`, 90ms stagger, 150ms delay |
+| Full-bleed photography | Scroll-linked parallax, ±5–8% of container height, never scaled |
+
+Implemented as `BlurText` / `BlurIn` (`src/components/marketing/BlurText.tsx`)
+and `ScrollMedia` (`ScrollMedia.tsx`).
+
+Constraints that still apply to them:
+- Fires **once**. Re-blurring on scroll-up reads as a glitch, not an effect.
+- The full string goes on `aria-label`; word spans are `aria-hidden`, so a
+  screen reader hears one sentence rather than a stream of fragments.
+- Text is real DOM content — present and readable if the animation never runs.
+- `prefers-reduced-motion` renders plain static text: no filter, no stagger,
+  no parallax.
+- No `will-change` left behind. A permanent hint on every word across a long
+  page costs more than it saves.
+
+**Still banned:** scroll-jacking, marquee-on-scroll velocity, text scrambling, cursor followers, magnetic buttons, 3D tilt, auto-playing carousels.
 
 Every animation wrapped in `prefers-reduced-motion: reduce` → instant final state, no exceptions.
 
