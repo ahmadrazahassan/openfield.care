@@ -84,7 +84,7 @@ export function Hero() {
               id="hero-heading"
               className="text-center font-display text-mega text-on-image"
               blur={16}
-              stagger={0.09}
+              stagger={0.075}
               delay={0.15}
             >
               {hero.headline}

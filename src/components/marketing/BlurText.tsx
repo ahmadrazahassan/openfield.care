@@ -41,8 +41,8 @@ export function BlurText({
   className,
   as = "p",
   delay = 0,
-  stagger = 0.055,
-  blur = 10,
+  stagger = 0.042,
+  blur = 12,
   id,
 }: Props) {
   const reduced = useReducedMotion();
@@ -77,7 +77,7 @@ export function BlurText({
             hidden: { filter: `blur(${blur}px)`, opacity: 0, y: "0.25em" },
             shown: { filter: "blur(0px)", opacity: 1, y: 0 },
           }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
         >
           {word}
           {i < words.length - 1 ? " " : ""}
@@ -118,7 +118,7 @@ export function BlurIn({
       initial={{ filter: `blur(${blur}px)`, opacity: 0, y: 16 }}
       whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </Tag>

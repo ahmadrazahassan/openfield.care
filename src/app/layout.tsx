@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, Open_Sans, Montserrat_Alternates } from "next/font/google";
 import { SITE } from "@/content/site";
 import { BRAND } from "@/content/assets";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { EXTENSION_ATTRIBUTE_GUARD } from "./extension-attribute-guard";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -88,6 +90,12 @@ export default function RootLayout({
       className={`${dmSans.variable} ${openSans.variable} ${montserratAlt.variable}`}
     >
       <body suppressHydrationWarning>
+        <SmoothScroll />
+        {/* Must stay the first node in <body>: it installs the guard before any
+            page markup is parsed. See extension-attribute-guard.ts. */}
+        <script
+          dangerouslySetInnerHTML={{ __html: EXTENSION_ATTRIBUTE_GUARD }}
+        />
         <a
           href="#main"
           className="sr-only-focusable focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[100] focus-visible:m-0 focus-visible:h-auto focus-visible:w-auto focus-visible:overflow-visible focus-visible:rounded-pill focus-visible:bg-ink focus-visible:px-5 focus-visible:py-3 focus-visible:text-sm focus-visible:text-page focus-visible:[clip-path:none]"

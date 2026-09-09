@@ -105,9 +105,21 @@ token, no sparkle/zap/bot iconography, no emoji.
 
 ### Motion
 
+- `SmoothScroll` — Lenis. It interpolates the **real** document scroll, so
+  `window.scrollY`, IntersectionObserver and `useScroll` all keep working.
 - `BlurText` / `BlurIn` — word-by-word blur reveal on scroll-in, fires once.
 - `ScrollMedia` — scroll-linked parallax on full-bleed photography.
 - `Reveal` — plain fade/rise for blocks that are not text.
+
+Lenis notes, because smooth scroll is easy to break things with:
+
+- Touch devices keep **native** scrolling. Momentum on momentum feels wrong on
+  a phone and costs battery for nothing.
+- `scroll-behavior` must stay unset in CSS — it fights Lenis.
+- In-page anchors are routed through `lenis.scrollTo`, otherwise the browser
+  jumps and Lenis drags it back.
+- Full-screen overlays must call `stopSmoothScroll()`; `overflow: hidden`
+  alone does not stop it.
 
 All three collapse to a static end state under `prefers-reduced-motion`, and
 the text is real DOM content so it reads correctly if the animation never

@@ -8,6 +8,7 @@ import { Container } from "./primitives";
 import { MenuIcon, CloseIcon, ArrowUpRightIcon } from "@/components/icons";
 import { NAV_PRIMARY, SITE } from "@/content/site";
 import { cn } from "@/lib/utils";
+import { startSmoothScroll, stopSmoothScroll } from "./SmoothScroll";
 
 /**
  * Type-led header. No container, no fill, no rule beneath it -- the mark and
@@ -22,9 +23,13 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
   const open = openedOn === pathname;
 
   useEffect(() => {
+    // overflow:hidden alone does not stop Lenis, so pause it too.
     document.body.style.overflow = open ? "hidden" : "";
+    if (open) stopSmoothScroll();
+    else startSmoothScroll();
     return () => {
       document.body.style.overflow = "";
+      startSmoothScroll();
     };
   }, [open]);
 
