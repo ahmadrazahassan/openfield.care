@@ -163,6 +163,26 @@ export const PRACTICE_CARDS = [
   },
 ] as const;
 
+/**
+ * Re-encode quality for next/image, in one place.
+ *
+ * next/image ALWAYS re-encodes: a pristine source JPEG still goes through the
+ * optimiser, so an <Image> with no `quality` prop is served at Next's default
+ * of 75 regardless of how good the file on disk is. Every <Image> therefore
+ * passes one of these explicitly.
+ *
+ * Any value used here must also appear in `images.qualities` in
+ * next.config.ts, or Next silently coerces it to the nearest allowed value.
+ */
+export const IMAGE_QUALITY = {
+  /** Full-bleed heroes and the big-type band — largest thing on screen. */
+  hero: 92,
+  /** Editorial bands, portraits, journal covers, card artwork. */
+  feature: 90,
+  /** Small cards, avatars, marquee marks — displayed under ~200px. */
+  thumb: 86,
+} as const;
+
 export const TEXTURE = {
   tornEdge: "/images/texture/texture-torn-edge.png",
   halftone: "/images/texture/texture-halftone-dots.png",

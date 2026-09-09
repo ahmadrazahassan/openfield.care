@@ -88,7 +88,10 @@ type BaseProps = VariantProps<typeof button> & {
 };
 
 export type ButtonProps = BaseProps &
-  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children"> & {
+  Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "className" | "children"
+  > & {
     asChild?: boolean;
   };
 
@@ -104,7 +107,11 @@ export function Button({
   const Comp = asChild ? Slot : "button";
   return (
     <Comp
-      className={cn("group", button({ variant, size, withArrow: arrow }), className)}
+      className={cn(
+        "group",
+        button({ variant, size, withArrow: arrow }),
+        className,
+      )}
       {...props}
     >
       <>
@@ -133,7 +140,11 @@ export function ButtonLink({
 }: ButtonLinkProps) {
   return (
     <Link
-      className={cn("group", button({ variant, size, withArrow: arrow }), className)}
+      className={cn(
+        "group",
+        button({ variant, size, withArrow: arrow }),
+        className,
+      )}
       {...props}
     >
       {children}

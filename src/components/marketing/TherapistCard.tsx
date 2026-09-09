@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Chip } from "./typography";
 import { cn } from "@/lib/utils";
-import { portraitFor } from "@/content/assets";
+import { portraitFor, IMAGE_QUALITY } from "@/content/assets";
 import type { TherapistRow } from "@/types/database.types";
 
 /**
@@ -35,6 +35,7 @@ export function TherapistCard({
               alt={portrait.alt}
               fill
               sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 76vw"
+              quality={IMAGE_QUALITY.feature}
               placeholder={portrait.blurDataURL ? "blur" : "empty"}
               blurDataURL={portrait.blurDataURL}
               className="object-cover"

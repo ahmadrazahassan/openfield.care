@@ -5,7 +5,7 @@ import { Eyebrow } from "./typography";
 import { Reveal } from "./Reveal";
 import { CheckIcon } from "@/components/icons";
 import { HOME } from "@/content/copy";
-import { ILLUSTRATION } from "@/content/assets";
+import { ILLUSTRATION, IMAGE_QUALITY } from "@/content/assets";
 
 /**
  * The diagonal split.
@@ -38,7 +38,12 @@ export function ForTeamsDiagonal() {
                 {forTeams.body}
               </p>
               <div className="mt-9">
-                <ButtonLink href={forTeams.cta.href} variant="onDark" size="lg" arrow>
+                <ButtonLink
+                  href={forTeams.cta.href}
+                  variant="onDark"
+                  size="lg"
+                  arrow
+                >
                   {forTeams.cta.label}
                 </ButtonLink>
               </div>
@@ -68,6 +73,7 @@ export function ForTeamsDiagonal() {
         aria-hidden="true"
         width={420}
         height={300}
+        quality={IMAGE_QUALITY.feature}
         className="pointer-events-none absolute right-[6%] top-[90px] hidden w-[240px] lg:block xl:w-[300px]"
       />
     </section>

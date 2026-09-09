@@ -11,7 +11,7 @@ import { Eyebrow, SectionHeading } from "./typography";
 import { Reveal } from "./Reveal";
 import { HOME } from "@/content/copy";
 import { getTestimonials } from "@/lib/queries";
-import { ILLUSTRATION, PHOTO } from "@/content/assets";
+import { ILLUSTRATION, PHOTO, IMAGE_QUALITY } from "@/content/assets";
 
 /* ── 05 Nobody starts from the same line ──────────────────────────────── */
 
@@ -27,6 +27,7 @@ export function StartingLine() {
               alt="Three runners crouched at the starting blocks of a track, each in a different lane."
               width={520}
               height={520}
+              quality={IMAGE_QUALITY.feature}
               className="w-full max-w-[520px]"
             />
           </Reveal>
@@ -113,6 +114,7 @@ export function HowItWorks() {
                   alt={STEP_ALT[i]}
                   width={200}
                   height={200}
+                  quality={IMAGE_QUALITY.feature}
                   className="mt-6 h-[200px] w-[200px]"
                 />
                 <h3 className="mt-6 text-d3">{step.title}</h3>

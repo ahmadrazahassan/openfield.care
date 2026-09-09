@@ -7,7 +7,7 @@ import { Chip } from "@/components/marketing/typography";
 import { CtaBand } from "@/components/marketing/sections";
 import { getPost, getPosts } from "@/lib/queries";
 import { getStaticSlugs } from "@/lib/supabase/static";
-import { JOURNAL_COVERS } from "@/content/assets";
+import { JOURNAL_COVERS, IMAGE_QUALITY } from "@/content/assets";
 import { SITE } from "@/content/site";
 
 export const revalidate = 3600;
@@ -106,6 +106,7 @@ export default async function PostPage({
                 fill
                 priority
                 sizes="(min-width: 768px) 68ch, 100vw"
+                quality={IMAGE_QUALITY.feature}
                 placeholder={cover.blurDataURL ? "blur" : "empty"}
                 blurDataURL={cover.blurDataURL}
                 className="object-cover"
@@ -169,6 +170,7 @@ export default async function PostPage({
                           placeholder={c.blurDataURL ? "blur" : "empty"}
                           blurDataURL={c.blurDataURL}
                           className="object-cover"
+                          quality={IMAGE_QUALITY.feature}
                         />
                       </div>
                       <h3 className="mt-4 text-d4 group-hover:underline group-hover:decoration-ink-25 group-hover:underline-offset-4">

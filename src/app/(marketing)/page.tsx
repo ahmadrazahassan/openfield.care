@@ -20,11 +20,7 @@ import { SectionHeading } from "@/components/marketing/typography";
 import { Reveal } from "@/components/marketing/Reveal";
 import { HOME } from "@/content/copy";
 import { FAQ } from "@/content/data";
-import {
-  getServices,
-  getTherapists,
-  getWeekOpenings,
-} from "@/lib/queries";
+import { getServices, getTherapists, getWeekOpenings } from "@/lib/queries";
 import { SITE } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -124,11 +120,7 @@ export default async function HomePage() {
       <Hero />
       <TrustMarquee />
       <ConcernIndex />
-      <PracticeBento
-        services={services}
-        therapists={therapists}
-        week={week}
-      />
+      <PracticeBento services={services} therapists={therapists} week={week} />
       <TangledBand />
       <StartingLine />
       <HowItWorks />

@@ -7,7 +7,7 @@ import { Reveal } from "@/components/marketing/Reveal";
 import { TherapistCard } from "@/components/marketing/TherapistCard";
 import { CtaBand } from "@/components/marketing/sections";
 import { getTherapists } from "@/lib/queries";
-import { PHOTO } from "@/content/assets";
+import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 import { SITE } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -62,6 +62,7 @@ export default async function AboutPage() {
                   alt={photo.alt}
                   fill
                   sizes="(min-width: 1024px) 40vw, 100vw"
+                  quality={IMAGE_QUALITY.feature}
                   placeholder={photo.blurDataURL ? "blur" : "empty"}
                   blurDataURL={photo.blurDataURL}
                   className="object-cover"

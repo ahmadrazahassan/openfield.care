@@ -30,7 +30,11 @@ type LogoProps = {
   markOnly?: boolean;
 };
 
-export function Logo({ light = false, className, markOnly = false }: LogoProps) {
+export function Logo({
+  light = false,
+  className,
+  markOnly = false,
+}: LogoProps) {
   return (
     <Link
       href="/"

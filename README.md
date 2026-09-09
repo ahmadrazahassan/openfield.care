@@ -116,6 +116,29 @@ external URL fails to load rather than slipping in.
   for an unknown path.
 - Icons: edit `public/icons/*.svg`, then `node scripts/build-icons.mjs`.
 
+### Image quality
+
+`next/image` **always re-encodes**. A pristine source JPEG is still put through
+the optimiser, so an `<Image>` with no `quality` prop is served at Next's
+default of **75** no matter how good the file on disk is.
+
+Every `<Image>` therefore passes an explicit tier from `IMAGE_QUALITY` in
+`src/content/assets.ts`:
+
+| Tier | Value | Used for |
+| --- | --- | --- |
+| `hero` | 92 | Full-bleed heroes, big-type band |
+| `feature` | 90 | Editorial bands, portraits, journal covers, card art |
+| `thumb` | 86 | Small cards, avatars, marquee marks |
+
+Any value used there **must** also appear in `images.qualities` in
+`next.config.ts` — Next 16 silently coerces anything else to the nearest
+allowed value. Keep the two lists in step.
+
+Source files are exported large (heroes at 2880w, JPEG q92 / WebP q92 /
+AVIF q70) so the optimiser always has more detail than it needs. Next serves
+the right size per breakpoint from `deviceSizes`, up to 3840.
+
 ### Before launch
 
 Some content is deliberately marked as placeholder and should be replaced:

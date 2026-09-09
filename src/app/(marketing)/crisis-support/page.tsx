@@ -35,8 +35,7 @@ const ROUTES = [
   },
   {
     label: "TODO(region) — Text-based crisis service",
-    detail:
-      "For people who cannot or would rather not speak on the phone.",
+    detail: "For people who cannot or would rather not speak on the phone.",
     action: null,
   },
   {

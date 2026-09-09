@@ -78,7 +78,11 @@ export default async function ServicePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <PageHero eyebrow="Service" title={service.name} lead={service.short_desc}>
+      <PageHero
+        eyebrow="Service"
+        title={service.name}
+        lead={service.short_desc}
+      >
         <div className="flex flex-wrap items-center gap-3">
           <ButtonLink href={`/book?service=${service.slug}`} arrow>
             Book this

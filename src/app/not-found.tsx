@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Container, Section } from "@/components/layout/primitives";
 import { ButtonLink } from "@/components/ui/button";
-import { ILLUSTRATION } from "@/content/assets";
+import { ILLUSTRATION, IMAGE_QUALITY } from "@/content/assets";
 import { EMPTY_STATES } from "@/content/copy";
 import { altText } from "@generated/alt-text";
 
@@ -21,6 +21,7 @@ export default function NotFound() {
               alt={alt}
               width={280}
               height={280}
+              quality={IMAGE_QUALITY.thumb}
               className="h-[220px] w-[220px] md:h-[280px] md:w-[280px]"
             />
             <h1 className="mt-10 text-d2 max-w-[16ch]">

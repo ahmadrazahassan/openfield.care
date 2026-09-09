@@ -7,7 +7,7 @@ import { Chip } from "@/components/marketing/typography";
 import { Reveal } from "@/components/marketing/Reveal";
 import { CtaBand } from "@/components/marketing/sections";
 import { getPosts } from "@/lib/queries";
-import { JOURNAL_COVERS } from "@/content/assets";
+import { JOURNAL_COVERS, IMAGE_QUALITY } from "@/content/assets";
 
 export const metadata: Metadata = {
   title: "Journal",
@@ -57,6 +57,7 @@ export default async function JournalPage() {
                       JOURNAL_COVERS[0].blurDataURL ? "blur" : "empty"
                     }
                     blurDataURL={JOURNAL_COVERS[0].blurDataURL}
+                    quality={IMAGE_QUALITY.feature}
                     className="object-cover"
                   />
                 </div>
@@ -91,8 +92,7 @@ export default async function JournalPage() {
         <Container>
           <ul className="grid gap-x-4 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((post, i) => {
-              const cover =
-                JOURNAL_COVERS[(i + 1) % JOURNAL_COVERS.length];
+              const cover = JOURNAL_COVERS[(i + 1) % JOURNAL_COVERS.length];
               return (
                 <Reveal as="li" key={post.id} delay={Math.min(i, 5) * 0.06}>
                   <Link href={`/journal/${post.slug}`} className="group block">
@@ -104,6 +104,7 @@ export default async function JournalPage() {
                         sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                         placeholder={cover.blurDataURL ? "blur" : "empty"}
                         blurDataURL={cover.blurDataURL}
+                        quality={IMAGE_QUALITY.feature}
                         className="object-cover"
                       />
                     </div>

@@ -9,7 +9,7 @@ import {
   SessionPhoneIcon,
   CalendarIcon,
 } from "@/components/icons";
-import { portraitFor, PRACTICE_CARDS } from "@/content/assets";
+import { portraitFor, PRACTICE_CARDS, IMAGE_QUALITY } from "@/content/assets";
 import { cn } from "@/lib/utils";
 import type { ServiceRow, TherapistRow } from "@/types/database.types";
 
@@ -53,12 +53,18 @@ function FeatureCard({
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-lg border border-ink-12 bg-paper">
       {/* Fixed-ratio stage so all three cards align regardless of artwork. */}
-      <div className={cn("relative aspect-[4/3] w-full", tone === "forest" ? "bg-forest" : "bg-page")}>
+      <div
+        className={cn(
+          "relative aspect-[4/3] w-full",
+          tone === "forest" ? "bg-forest" : "bg-page",
+        )}
+      >
         <Image
           src={art}
           alt={alt}
           fill
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+          quality={IMAGE_QUALITY.feature}
           className="object-contain p-6"
         />
       </div>
@@ -109,9 +115,8 @@ export function PracticeBento({ services, therapists, week }: Props) {
 
   const modalityCounts = MODALITY_META.map((m) => ({
     ...m,
-    count: services.filter((s) =>
-      (s.modalities as string[]).includes(m.key),
-    ).length,
+    count: services.filter((s) => (s.modalities as string[]).includes(m.key))
+      .length,
   }));
 
   const people = therapists.slice(0, 6);
@@ -162,7 +167,10 @@ export function PracticeBento({ services, therapists, week }: Props) {
                 appointments still unbooked
               </p>
 
-              <ul className="mt-auto flex items-end gap-1.5 pt-8" aria-hidden="true">
+              <ul
+                className="mt-auto flex items-end gap-1.5 pt-8"
+                aria-hidden="true"
+              >
                 {week.map((d) => (
                   <li
                     key={d.key}
@@ -255,6 +263,7 @@ export function PracticeBento({ services, therapists, week }: Props) {
                           placeholder={portrait.blurDataURL ? "blur" : "empty"}
                           blurDataURL={portrait.blurDataURL}
                           className="object-cover"
+                          quality={IMAGE_QUALITY.feature}
                         />
                       ) : (
                         <span className="absolute inset-0 grid place-items-center font-display text-xs text-ink/70">

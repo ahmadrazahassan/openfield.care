@@ -48,7 +48,10 @@ function monthGrid(cursor: Date): (Date | null)[] {
   return cells;
 }
 
-function partOfDay(iso: string, timeZone: string): "Morning" | "Afternoon" | "Evening" {
+function partOfDay(
+  iso: string,
+  timeZone: string,
+): "Morning" | "Afternoon" | "Evening" {
   const hour = Number(
     new Intl.DateTimeFormat("en-GB", {
       timeZone,
@@ -133,8 +136,9 @@ export function BookingCalendar({
   // Chosen day is a user override; otherwise the first day with openings.
   const [chosenDay, setChosenDay] = useState<string | null>(null);
   const firstOpen =
-    cells.find((d) => d && (byDay.get(dateKey(d, timezone))?.length ?? 0) > 0) ??
-    null;
+    cells.find(
+      (d) => d && (byDay.get(dateKey(d, timezone))?.length ?? 0) > 0,
+    ) ?? null;
   const firstOpenKey = firstOpen ? dateKey(firstOpen, timezone) : null;
   const activeDay =
     chosenDay && (byDay.get(chosenDay)?.length ?? 0) > 0
@@ -148,7 +152,8 @@ export function BookingCalendar({
       Afternoon: [],
       Evening: [],
     };
-    for (const s of daySlots) buckets[partOfDay(s.slot_start, timezone)].push(s);
+    for (const s of daySlots)
+      buckets[partOfDay(s.slot_start, timezone)].push(s);
     return Object.entries(buckets).filter(([, v]) => v.length > 0);
   }, [activeDay, byDay, timezone]);
 

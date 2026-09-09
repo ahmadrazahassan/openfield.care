@@ -107,10 +107,7 @@ export function InsetMedia({
   return (
     <div className="px-4 md:px-6">
       <Tag
-        className={cn(
-          "relative isolate overflow-hidden rounded-xl",
-          className,
-        )}
+        className={cn("relative isolate overflow-hidden rounded-xl", className)}
       >
         {children}
       </Tag>

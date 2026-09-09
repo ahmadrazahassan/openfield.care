@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Logo } from "@/components/layout/Logo";
 import { Container } from "@/components/layout/primitives";
-import { PHOTO } from "@/content/assets";
+import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 import { SITE } from "@/content/site";
 
 export default function AuthLayout({
@@ -45,6 +45,7 @@ export default function AuthLayout({
           alt=""
           fill
           sizes="50vw"
+          quality={IMAGE_QUALITY.feature}
           placeholder={photo.blurDataURL ? "blur" : "empty"}
           blurDataURL={photo.blurDataURL}
           className="object-cover"

@@ -6,7 +6,7 @@ import { Reveal } from "./Reveal";
 import { IconFor, ArrowUpRightIcon } from "@/components/icons";
 import { HOME } from "@/content/copy";
 import { CONCERNS } from "@/content/data";
-import { ILLUSTRATION } from "@/content/assets";
+import { ILLUSTRATION, IMAGE_QUALITY } from "@/content/assets";
 
 /**
  * What we help with.
@@ -42,6 +42,7 @@ export function ConcernIndex() {
                   alt="A figure holding their head, surrounded by small doodles of tangled thoughts."
                   width={340}
                   height={340}
+                  quality={IMAGE_QUALITY.feature}
                   className="mt-12 hidden w-full max-w-[300px] lg:block"
                 />
               </Reveal>
@@ -81,7 +82,9 @@ export function ConcernIndex() {
                         display, so it can animate and stays in the a11y tree. */}
                     <p className="grid grid-rows-[0fr] overflow-hidden pl-11 text-ink-70 transition-[grid-template-rows] duration-base ease-out-soft group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr] md:pl-[3.25rem]">
                       <span className="min-h-0">
-                        <span className="block pt-3 max-w-[46ch]">{c.line}</span>
+                        <span className="block pt-3 max-w-[46ch]">
+                          {c.line}
+                        </span>
                       </span>
                     </p>
                   </Link>

@@ -12,7 +12,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/queries";
 import { signOut } from "@/lib/actions/auth";
 import { MODALITY_LABEL, formatSlotFull } from "@/lib/booking";
-import { ILLUSTRATION } from "@/content/assets";
+import { ILLUSTRATION, IMAGE_QUALITY } from "@/content/assets";
 import { EMPTY_STATES } from "@/content/copy";
 
 export const metadata: Metadata = {
@@ -82,6 +82,7 @@ export default async function AccountPage() {
                   aria-hidden="true"
                   width={180}
                   height={180}
+                  quality={IMAGE_QUALITY.thumb}
                 />
                 <h3 className="mt-6 text-d4">
                   {EMPTY_STATES.noAppointments.heading}

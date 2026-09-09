@@ -29,8 +29,7 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
   }, [open]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) =>
-      e.key === "Escape" && setOpenedOn(null);
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenedOn(null);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);

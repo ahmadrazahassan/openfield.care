@@ -8,7 +8,7 @@ import { CtaBand } from "@/components/marketing/sections";
 import { TherapistFilters } from "@/components/marketing/TherapistFilters";
 import { getTherapists } from "@/lib/queries";
 import { EMPTY_STATES } from "@/content/copy";
-import { ILLUSTRATION } from "@/content/assets";
+import { ILLUSTRATION, IMAGE_QUALITY } from "@/content/assets";
 
 export const metadata: Metadata = {
   title: "Therapists",
@@ -68,6 +68,7 @@ export default async function TherapistsPage({
                 aria-hidden="true"
                 width={240}
                 height={240}
+                quality={IMAGE_QUALITY.thumb}
               />
               <h2 className="mt-6 text-d3">
                 {EMPTY_STATES.noTherapists.heading}

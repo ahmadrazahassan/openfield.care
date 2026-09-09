@@ -8,7 +8,7 @@ import { CtaBand } from "@/components/marketing/sections";
 import { ButtonLink } from "@/components/ui/button";
 import { getTherapist, getServicesForTherapist } from "@/lib/queries";
 import { getStaticSlugs } from "@/lib/supabase/static";
-import { portraitFor } from "@/content/assets";
+import { portraitFor, IMAGE_QUALITY } from "@/content/assets";
 import { formatDuration } from "@/lib/utils";
 import { PriceTag } from "@/components/marketing/PriceTag";
 import { SITE } from "@/content/site";
@@ -87,6 +87,7 @@ export default async function TherapistPage({
                       sizes="(min-width: 1024px) 340px, 100vw"
                       placeholder={portrait.blurDataURL ? "blur" : "empty"}
                       blurDataURL={portrait.blurDataURL}
+                      quality={IMAGE_QUALITY.feature}
                       className="object-cover"
                     />
                   ) : (

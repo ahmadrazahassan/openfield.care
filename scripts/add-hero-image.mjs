@@ -27,18 +27,18 @@ async function main() {
   console.log(`source: ${meta.width}x${meta.height}`);
 
   // ── Landscape master ────────────────────────────────────────────────────
-  const landscape = { w: 2000, h: 1125 };
-  const base = sharp(SRC).resize(landscape.w, landscape.h, { fit: "cover" });
+  const landscape = { w: 2880, h: 1620 };
+  const base = sharp(SRC).resize(landscape.w, landscape.h, { fit: "cover", kernel: "lanczos3" });
 
-  await base.clone().jpeg({ quality: 82, mozjpeg: true })
+  await base.clone().jpeg({ quality: 92, mozjpeg: true })
     .toFile(`${OUT}/hero-field-aerial.jpg`);
-  await base.clone().webp({ quality: 80 })
+  await base.clone().webp({ quality: 92 })
     .toFile(`${OUT}/hero-field-aerial.webp`);
-  await base.clone().avif({ quality: 48 })
+  await base.clone().avif({ quality: 70 })
     .toFile(`${OUT}/hero-field-aerial.avif`);
 
   // ── Portrait crop for mobile, centred on the subject ────────────────────
-  const portrait = { w: 900, h: 1200 };
+  const portrait = { w: 1200, h: 1600 };
   const srcAspect = meta.width / meta.height;
   const cropAspect = portrait.w / portrait.h;
 
@@ -62,13 +62,13 @@ async function main() {
 
   const cropped = sharp(SRC)
     .extract({ left, top, width: cw, height: ch })
-    .resize(portrait.w, portrait.h, { fit: "cover" });
+    .resize(portrait.w, portrait.h, { fit: "cover", kernel: "lanczos3" });
 
-  await cropped.clone().jpeg({ quality: 82, mozjpeg: true })
+  await cropped.clone().jpeg({ quality: 92, mozjpeg: true })
     .toFile(`${OUT}/hero-field-aerial-mobile.jpg`);
-  await cropped.clone().webp({ quality: 80 })
+  await cropped.clone().webp({ quality: 92 })
     .toFile(`${OUT}/hero-field-aerial-mobile.webp`);
-  await cropped.clone().avif({ quality: 48 })
+  await cropped.clone().avif({ quality: 70 })
     .toFile(`${OUT}/hero-field-aerial-mobile.avif`);
 
   // ── Blur placeholders ───────────────────────────────────────────────────
@@ -77,7 +77,7 @@ async function main() {
     return `data:image/jpeg;base64,${buf.toString("base64")}`;
   };
 
-  const landscapeBlur = await blur(sharp(SRC).resize(landscape.w, landscape.h, { fit: "cover" }));
+  const landscapeBlur = await blur(sharp(SRC).resize(landscape.w, landscape.h, { fit: "cover", kernel: "lanczos3" }));
   const portraitBlur = await blur(cropped);
 
   const entries = {

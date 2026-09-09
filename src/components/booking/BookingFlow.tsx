@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useMemo,
-  useState,
-  useSyncExternalStore,
-  useTransition,
-} from "react";
+import { useMemo, useState, useSyncExternalStore, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,7 +9,7 @@ import { Button, ButtonLink } from "@/components/ui/button";
 import { Chip } from "@/components/marketing/typography";
 import { PriceTag } from "@/components/marketing/PriceTag";
 import { IconFor, type IconKey, ICONS, CheckIcon } from "@/components/icons";
-import { portraitFor } from "@/content/assets";
+import { portraitFor, IMAGE_QUALITY } from "@/content/assets";
 import { BOOKING_COPY } from "@/content/copy";
 import { SAFETY_NOTICE_LONG } from "@/content/site";
 import { formatDuration, cn } from "@/lib/utils";
@@ -123,20 +118,33 @@ export function BookingFlow({
         </div>
 
         <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <StepRail current={step} reachable={reachable} onJump={(k) => setParams({ step: k })} />
+          <StepRail
+            current={step}
+            reachable={reachable}
+            onJump={(k) => setParams({ step: k })}
+          />
 
           <div className="min-w-0 lg:col-span-8 lg:col-start-5">
             {step === "service" && (
               <ServiceStep
                 services={services}
-                onPick={(s) => setParams({ service: s.slug, therapist: null, slot: null, step: "therapist" })}
+                onPick={(s) =>
+                  setParams({
+                    service: s.slug,
+                    therapist: null,
+                    slot: null,
+                    step: "therapist",
+                  })
+                }
               />
             )}
 
             {step === "therapist" && service && (
               <TherapistStep
                 therapists={eligibleTherapists}
-                onPick={(t) => setParams({ therapist: t.slug, slot: null, step: "time" })}
+                onPick={(t) =>
+                  setParams({ therapist: t.slug, slot: null, step: "time" })
+                }
                 onBack={() => setParams({ step: "service" })}
               />
             )}
@@ -147,7 +155,9 @@ export function BookingFlow({
                 therapist={therapist}
                 timezone={timezone}
                 selected={slotStart}
-                onPick={(slot) => setParams({ slot: slot.slot_start, step: "details" })}
+                onPick={(slot) =>
+                  setParams({ slot: slot.slot_start, step: "details" })
+                }
                 onBack={() => setParams({ step: "therapist" })}
               />
             )}
@@ -282,7 +292,10 @@ function ServiceStep({
               className="flex h-full w-full flex-col rounded-lg border border-ink-12 p-6 text-left transition-colors duration-fast hover:border-ink-40"
             >
               <div className="flex items-start justify-between gap-4">
-                <IconFor name={iconKeyOf(s.icon_key)} className="h-7 w-7 text-ink" />
+                <IconFor
+                  name={iconKeyOf(s.icon_key)}
+                  className="h-7 w-7 text-ink"
+                />
                 <PriceTag
                   cents={s.price_cents}
                   currency={s.currency}
@@ -327,7 +340,10 @@ function TherapistStep({
       {therapists.length === 0 ? (
         <p className="rounded-lg border border-ink-12 p-7 text-ink-70">
           Nobody is currently taking new clients for that service.{" "}
-          <button onClick={onBack} className="text-ink underline underline-offset-4">
+          <button
+            onClick={onBack}
+            className="text-ink underline underline-offset-4"
+          >
             Choose another service
           </button>
           .
@@ -352,6 +368,7 @@ function TherapistStep({
                         sizes="80px"
                         placeholder={portrait.blurDataURL ? "blur" : "empty"}
                         blurDataURL={portrait.blurDataURL}
+                        quality={IMAGE_QUALITY.thumb}
                         className="object-cover"
                       />
                     ) : (
@@ -362,7 +379,9 @@ function TherapistStep({
                   </span>
                   <span className="flex min-w-0 flex-col">
                     <span className="text-d4">{t.display_name}</span>
-                    <span className="mt-0.5 text-sm text-ink-55">{t.title}</span>
+                    <span className="mt-0.5 text-sm text-ink-55">
+                      {t.title}
+                    </span>
                     <span className="mt-3 flex flex-wrap gap-1.5">
                       {t.specialties.slice(0, 2).map((sp) => (
                         <Chip key={sp}>{sp}</Chip>
@@ -542,12 +561,30 @@ function DetailsStep({
       </dl>
 
       <form action={submit} className="flex flex-col gap-6">
-        <Field label="Full name" name="fullName" required defaultValue={prefill?.fullName} />
-        <Field label="Email" name="email" type="email" required defaultValue={prefill?.email} />
-        <Field label="Phone (optional)" name="phone" type="tel" defaultValue={prefill?.phone} />
+        <Field
+          label="Full name"
+          name="fullName"
+          required
+          defaultValue={prefill?.fullName}
+        />
+        <Field
+          label="Email"
+          name="email"
+          type="email"
+          required
+          defaultValue={prefill?.email}
+        />
+        <Field
+          label="Phone (optional)"
+          name="phone"
+          type="tel"
+          defaultValue={prefill?.phone}
+        />
 
         <fieldset>
-          <legend className="text-sm font-medium text-ink">How would you like to meet?</legend>
+          <legend className="text-sm font-medium text-ink">
+            How would you like to meet?
+          </legend>
           <ul className="mt-3 flex flex-wrap gap-2">
             {modalities.map((m) => (
               <li key={m}>
@@ -598,7 +635,10 @@ function DetailsStep({
         <p className="text-sm text-ink-55">{SAFETY_NOTICE_LONG}</p>
 
         {error && (
-          <p role="alert" className="rounded-md border border-danger/30 bg-danger/[0.06] px-4 py-3 text-sm text-danger">
+          <p
+            role="alert"
+            className="rounded-md border border-danger/30 bg-danger/[0.06] px-4 py-3 text-sm text-danger"
+          >
             {error}
           </p>
         )}

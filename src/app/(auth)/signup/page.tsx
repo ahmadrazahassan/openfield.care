@@ -24,7 +24,11 @@ export default function SignupPage() {
 
       <div className="mt-10">
         <Suspense fallback={null}>
-          <AuthForm action={signUp} submitLabel="Create account" mode="signup" />
+          <AuthForm
+            action={signUp}
+            submitLabel="Create account"
+            mode="signup"
+          />
         </Suspense>
       </div>
 
