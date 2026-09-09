@@ -175,6 +175,9 @@ export const PRACTICE_CARDS = [
  * next.config.ts, or Next silently coerces it to the nearest allowed value.
  */
 export const IMAGE_QUALITY = {
+  /** Near-lossless. The footer photograph fills the whole viewport width and
+   *  is the last thing on every page, so it gets the top of the scale. */
+  max: 100,
   /** Full-bleed heroes and the big-type band — largest thing on screen. */
   hero: 92,
   /** Editorial bands, portraits, journal covers, card artwork. */

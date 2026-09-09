@@ -4,7 +4,7 @@ import { Logo } from "./Logo";
 import { Container, Scrim } from "./primitives";
 import { TornEdge } from "./TornEdge";
 import { FOOTER_NAV, SITE } from "@/content/site";
-import { PHOTO } from "@/content/assets";
+import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 
 export function SiteFooter() {
   const photo = PHOTO.footerField;
@@ -22,7 +22,7 @@ export function SiteFooter() {
           alt=""
           fill
           sizes="100vw"
-          quality={82}
+          quality={IMAGE_QUALITY.max}
           placeholder={photo.blurDataURL ? "blur" : "empty"}
           blurDataURL={photo.blurDataURL}
           className="-z-20 object-cover object-bottom"

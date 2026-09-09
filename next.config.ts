@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     // Next 16 narrowed the default to [75] and silently coerces anything else
     // to the nearest allowed value. These mirror IMAGE_QUALITY in
     // src/content/assets.ts — keep the two in step.
-    qualities: [75, 86, 90, 92],
+    qualities: [75, 86, 90, 92, 100],
 
     // Explicit rather than inherited: the defaults changed in Next 16, and the
     // top end matters for full-bleed heroes on high-DPI displays.

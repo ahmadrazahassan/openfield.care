@@ -3,7 +3,7 @@ import Link from "next/link";
 import { InsetMedia, Scrim } from "@/components/layout/primitives";
 import { ArrowUpRightIcon } from "@/components/icons";
 import { HOME } from "@/content/copy";
-import { PHOTO } from "@/content/assets";
+import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 
 const INSET_SIZES = "(min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)";
 
@@ -33,7 +33,7 @@ export function Hero() {
           fill
           priority
           sizes={INSET_SIZES}
-          quality={82}
+          quality={IMAGE_QUALITY.hero}
           placeholder={photo.blurDataURL ? "blur" : "empty"}
           blurDataURL={photo.blurDataURL}
           className="-z-20 hidden object-cover object-center sm:block"
@@ -45,7 +45,7 @@ export function Hero() {
           fill
           priority
           sizes={INSET_SIZES}
-          quality={82}
+          quality={IMAGE_QUALITY.hero}
           placeholder={mobile.blurDataURL ? "blur" : "empty"}
           blurDataURL={mobile.blurDataURL}
           className="-z-20 object-cover object-center sm:hidden"

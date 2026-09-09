@@ -186,7 +186,7 @@ export function CtaBand() {
           alt=""
           fill
           sizes="(min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"
-          quality={82}
+          quality={IMAGE_QUALITY.hero}
           placeholder={photo.blurDataURL ? "blur" : "empty"}
           blurDataURL={photo.blurDataURL}
           className="-z-20 object-cover object-center"

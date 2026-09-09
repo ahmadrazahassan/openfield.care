@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { useRef } from "react";
+import { IMAGE_QUALITY } from "@/content/assets";
 import type { ImageAsset } from "@/content/assets";
 
 /**
@@ -34,7 +35,7 @@ export function KnotResolve({
         alt={reduced ? "" : knot.alt}
         fill
         sizes="(min-width: 1024px) 40vw, 100vw"
-        quality={82}
+        quality={IMAGE_QUALITY.feature}
         placeholder={knot.blurDataURL ? "blur" : "empty"}
         blurDataURL={knot.blurDataURL}
         className="object-cover grayscale"
@@ -54,7 +55,7 @@ export function KnotResolve({
           alt={resolved.alt}
           fill
           sizes="(min-width: 1024px) 40vw, 100vw"
-          quality={82}
+          quality={IMAGE_QUALITY.feature}
           placeholder={resolved.blurDataURL ? "blur" : "empty"}
           blurDataURL={resolved.blurDataURL}
           className="object-cover grayscale"

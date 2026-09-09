@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { InsetMedia, Scrim } from "@/components/layout/primitives";
 import { HOME } from "@/content/copy";
-import { PHOTO } from "@/content/assets";
+import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 
 /**
  * A breath. One photograph, one word, four micro-caps labels. No button, no
@@ -20,7 +20,7 @@ export function BigTypeBand() {
           alt={photo.alt}
           fill
           sizes={"(min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"}
-          quality={82}
+          quality={IMAGE_QUALITY.hero}
           placeholder={photo.blurDataURL ? "blur" : "empty"}
           blurDataURL={photo.blurDataURL}
           className="-z-20 object-cover object-center"

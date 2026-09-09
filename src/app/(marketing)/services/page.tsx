@@ -9,7 +9,7 @@ import { Reveal } from "@/components/marketing/Reveal";
 import { CtaBand } from "@/components/marketing/sections";
 import { IconFor, type IconKey, ICONS } from "@/components/icons";
 import { getServices } from "@/lib/queries";
-import { PHOTO } from "@/content/assets";
+import { PHOTO, IMAGE_QUALITY } from "@/content/assets";
 import { formatDuration } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -50,7 +50,7 @@ export default async function ServicesPage() {
             fill
             priority
             sizes="(min-width: 1440px) 1440px, 100vw"
-            quality={82}
+            quality={IMAGE_QUALITY.hero}
             placeholder={PHOTO.consultRoom.blurDataURL ? "blur" : "empty"}
             blurDataURL={PHOTO.consultRoom.blurDataURL}
             className="object-cover"
