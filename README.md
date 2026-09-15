@@ -64,7 +64,8 @@ Supabase Postgres. The important pieces:
   `availability_rules`, subtracting existing appointments and `time_off`.
 - **`book_appointment(...)`** is the only write path. It is `SECURITY DEFINER`,
   reads price and duration from the catalogue rather than trusting the client,
-  re-validates the slot, and works with or without a signed-in user.
+  re-validates the slot, works with or without a signed-in user, and confirms
+  the booking immediately.
 - **`appointments_no_overlap`** is a GiST exclusion constraint on
   `(therapist_id, tstzrange(starts_at, ends_at))`. Double-booking is impossible
   at the database level, not merely discouraged in the UI.

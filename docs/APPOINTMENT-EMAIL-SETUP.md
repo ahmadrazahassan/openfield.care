@@ -9,7 +9,7 @@ lost because email was temporarily unavailable.
 
 The following events are sent automatically:
 
-- New booking: request received (the slot is held while the practice confirms it)
+- New booking: confirmation (bookings are confirmed immediately on booking)
 - Status changed to `confirmed`: appointment confirmation
 - Time, therapist, service, or format changed: rescheduled details
 - Status changed to `cancelled`: cancellation notice
