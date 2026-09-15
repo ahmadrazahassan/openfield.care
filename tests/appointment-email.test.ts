@@ -11,7 +11,7 @@ const job = (event_type: AppointmentEmailJob["event_type"]): AppointmentEmailJob
   payload: {
     id: "00000000-0000-0000-0000-000000000002",
     reference: "ABCD1234",
-    name: "A <Client>",
+    name: "<Sam> Client",
     email: "client@example.com",
     therapist: "A. Mensah",
     service: "Anxiety & panic",
@@ -27,11 +27,12 @@ const job = (event_type: AppointmentEmailJob["event_type"]): AppointmentEmailJob
 test("confirmation email is branded, escaped, and calendar-ready", () => {
   const rendered = renderAppointmentEmail(job("booking_confirmed"));
   assert.equal(rendered.subject, "Your Open Up Room appointment is confirmed");
-  assert.match(rendered.html, /A &lt;Client&gt;/);
-  assert.doesNotMatch(rendered.html, /A <Client>/);
+  assert.match(rendered.html, /Hi &lt;Sam&gt;,/);
+  assert.doesNotMatch(rendered.html, /<Sam>/);
   assert.equal(rendered.attachments[0]?.filename, "openuproom-ABCD1234.ics");
   assert.match(rendered.attachments[0]?.content ?? "", /^[A-Za-z0-9+/]+=*$/);
   assert.match(rendered.text, /GMT\+5/);
+  assert.match(rendered.html, /https:\/\/www\.openuproom\.com\/brand\/email-wordmark\.png/);
 });
 
 test("cancellation email does not leave a stale calendar attachment", () => {

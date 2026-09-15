@@ -70,10 +70,14 @@ Deno.serve(async request => {
     const db = createClient(supabaseUrl, serviceRoleKey, {
       auth: { persistSession: false, autoRefreshToken: false },
     });
-    const siteUrl = Deno.env.get("SITE_URL") || Deno.env.get("NEXT_PUBLIC_SITE_URL") || "https://openuproom.com";
+    const siteUrl = Deno.env.get("SITE_URL") || Deno.env.get("NEXT_PUBLIC_SITE_URL") || "https://www.openuproom.com";
     let sent = 0;
     let failed = 0;
-    for (let count = 0; count < 25; count += 1) {
+    // Drain the queue within a time budget rather than a fixed count, so a busy
+    // reminder minute does not spill into the next tick. Leases (5 min) outlast
+    // the budget, and overlapping runs are safe: claims use SKIP LOCKED.
+    const deadline = Date.now() + 40_000;
+    for (let count = 0; count < 500 && Date.now() < deadline; count += 1) {
       const { data, error } = await db.rpc("claim_appointment_email", {});
       if (error) throw new Error("Email queue unavailable");
       const raw = data?.[0] as AppointmentEmailJob | undefined;

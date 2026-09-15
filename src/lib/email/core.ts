@@ -109,75 +109,235 @@ function base64(value: string): string {
   return btoa(unescape(encodeURIComponent(value)));
 }
 
+const BRAND = {
+  name: "Open Up Room",
+  ink: "#131316",
+  page: "#f1f1f1",
+  paper: "#ffffff",
+  signal: "#00d54b",
+  muted: "#6b6b73",
+  line: "#e3e3e3",
+  font: "'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif",
+  micro: "'Montserrat Alternates','DM Sans',Helvetica,Arial,sans-serif",
+};
+
+type EmailCopy = {
+  subject: string;
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  preheader: string;
+};
+
+const COPY: Record<AppointmentEmailEvent, EmailCopy> = {
+  booking_received: {
+    subject: "We received your appointment request",
+    eyebrow: "Request received",
+    heading: "We have your request",
+    intro: "Your time is held. We will confirm it shortly.",
+    preheader: "Your time is held while we confirm it.",
+  },
+  booking_confirmed: {
+    subject: "Your Open Up Room appointment is confirmed",
+    eyebrow: "Confirmed",
+    heading: "You are booked in",
+    intro: "Your session is confirmed. The details are below, and a calendar file is attached.",
+    preheader: "Your session is confirmed. Details inside.",
+  },
+  booking_rescheduled: {
+    subject: "Your Open Up Room appointment was updated",
+    eyebrow: "Updated",
+    heading: "Your session has moved",
+    intro: "Here are the new details. The attached calendar file replaces the old one.",
+    preheader: "Your session has a new time.",
+  },
+  reminder_24h: {
+    subject: "Reminder: your Open Up Room session is tomorrow",
+    eyebrow: "Tomorrow",
+    heading: "See you tomorrow",
+    intro: "A quick reminder of your session. If you can no longer make it, reply to this email so the time can go to someone else.",
+    preheader: "A quick reminder of your session tomorrow.",
+  },
+  reminder_1h: {
+    subject: "Starting soon: your Open Up Room session",
+    eyebrow: "Starting soon",
+    heading: "Your session starts in an hour",
+    intro: "Find somewhere quiet and private. Everything you need is below.",
+    preheader: "Your session starts in about an hour.",
+  },
+  booking_cancelled: {
+    subject: "Your Open Up Room appointment was cancelled",
+    eyebrow: "Cancelled",
+    heading: "Your session was cancelled",
+    intro: "This appointment is no longer scheduled. Book another time whenever you are ready.",
+    preheader: "This appointment is no longer scheduled.",
+  },
+};
+
+// The apex redirects to www on Vercel. Image proxies (Gmail, Outlook, some
+// temp-mail and security scanners) do not always follow redirects, so every
+// link and image points at the final host directly.
+const CANONICAL_ORIGIN = "https://www.openuproom.com";
+
+function canonicalSiteUrl(value: string | null | undefined): string {
+  try {
+    const url = new URL(value || CANONICAL_ORIGIN);
+    if (url.hostname === "openuproom.com") url.hostname = "www.openuproom.com";
+    return url.origin;
+  } catch {
+    return CANONICAL_ORIGIN;
+  }
+}
+
+function absoluteUrl(path: string, siteUrl: string): string {
+  try {
+    return new URL(path, siteUrl).toString();
+  } catch {
+    return "";
+  }
+}
+
+function firstName(name: string | null | undefined): string {
+  return (name ?? "").trim().split(/\s+/)[0] || "there";
+}
+
+function layout(input: {
+  preheader: string;
+  logoUrl: string;
+  homeUrl: string;
+  body: string;
+  footer: string;
+}): string {
+  const b = BRAND;
+  // Tables and inline styles: the one structure Outlook, Gmail and Apple Mail
+  // all render the same way.
+  return `<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>${escapeHtml(b.name)}</title>
+<style>
+  body{margin:0;padding:0;background:${b.page};-webkit-text-size-adjust:100%}
+  @media (max-width:620px){
+    .shell{padding:28px 12px !important}
+    .card{padding:32px 24px !important}
+    .h1{font-size:24px !important}
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:${b.page}">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:${b.page}">${escapeHtml(input.preheader)}${"&#8199;&#65279;&#847;".repeat(24)}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${b.page}" style="background:${b.page}">
+<tr><td align="center" class="shell" style="padding:48px 16px">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px">
+    <tr><td style="padding:0 4px 28px">
+      <a href="${escapeHtml(input.homeUrl)}" style="text-decoration:none"><img src="${escapeHtml(input.logoUrl)}" width="148" height="21" alt="${escapeHtml(b.name)}" style="display:block;border:0;outline:none;width:148px;height:21px;font-family:${b.font};font-size:18px;font-weight:600;color:${b.ink}"></a>
+    </td></tr>
+    <tr><td class="card" bgcolor="${b.paper}" style="background:${b.paper};border-radius:20px;padding:44px 40px;font-family:${b.font};color:${b.ink}">
+${input.body}
+    </td></tr>
+    <tr><td style="padding:28px 4px 0;font-family:${b.font};font-size:12px;line-height:1.7;color:${b.muted}">
+${input.footer}
+    </td></tr>
+  </table>
+</td></tr>
+</table>
+</body>
+</html>`;
+}
+
+function button(label: string, href: string): string {
+  const b = BRAND;
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:32px 0 0"><tr><td bgcolor="${b.signal}" style="background:${b.signal};border-radius:999px"><a href="${escapeHtml(href)}" style="display:inline-block;padding:15px 28px;font-family:${b.font};font-size:15px;font-weight:600;line-height:1;color:${b.ink};text-decoration:none;border-radius:999px">${escapeHtml(label)}</a></td></tr></table>`;
+}
+
 export function renderAppointmentEmail(job: AppointmentEmailJob): RenderedAppointmentEmail {
   const p = job.payload;
+  const b = BRAND;
+  const copy = COPY[job.event_type];
+  const cancelled = job.event_type === "booking_cancelled";
   const timezone = p.timezone || "UTC";
   const date = formatDate(p.starts_at, timezone);
-  const time = `${formatTime(p.starts_at, timezone)} – ${formatTime(p.ends_at, timezone)}`;
+  // Zone name once, on the end time: "14:00 – 14:50 GMT+5".
+  const startTime = formatTime(p.starts_at, timezone).replace(/\s+\S+$/, "");
+  const time = `${startTime} – ${formatTime(p.ends_at, timezone)}`;
   const modality = modalityLabels[p.modality] || p.modality;
   const reference = p.reference;
-  const siteUrl = p.site_url || "https://openuproom.com";
-  const manageUrl = (() => {
-    try {
-      return new URL("/account/appointments", siteUrl).toString();
-    } catch {
-      return "";
-    }
-  })();
+  const siteUrl = canonicalSiteUrl(p.site_url);
+  const homeUrl = absoluteUrl("/", siteUrl);
+  // Always the production asset, even when rendering from a preview deploy.
+  const logoUrl = `${CANONICAL_ORIGIN}/brand/email-wordmark.png`;
+  const manageUrl = absoluteUrl("/account/appointments", siteUrl);
+  const bookUrl = absoluteUrl("/book", siteUrl);
+  const crisisUrl = absoluteUrl("/crisis-support", siteUrl);
+  const name = firstName(p.name);
 
-  const copy = {
-    booking_received: {
-      subject: "We received your appointment request",
-      heading: "Your appointment request is in",
-      intro: "Thanks for choosing Open Up Room. We have held this time while the practice confirms your appointment.",
-    },
-    booking_confirmed: {
-      subject: "Your Open Up Room appointment is confirmed",
-      heading: "Your appointment is confirmed",
-      intro: "Everything is set. We look forward to seeing you.",
-    },
-    booking_rescheduled: {
-      subject: "Your Open Up Room appointment was updated",
-      heading: "Your appointment details changed",
-      intro: "Here are the latest details for your Open Up Room appointment.",
-    },
-    reminder_24h: {
-      subject: "Reminder: your Open Up Room session is tomorrow",
-      heading: "Your session is tomorrow",
-      intro: "A quick reminder of your appointment. If you can no longer make it, please let us know as soon as you can so the time can go to someone else.",
-    },
-    reminder_1h: {
-      subject: "Starting soon: your Open Up Room session",
-      heading: "Your session starts in about an hour",
-      intro: "Take a moment to find somewhere quiet and private. Everything you need is below.",
-    },
-    booking_cancelled: {
-      subject: "Your Open Up Room appointment was cancelled",
-      heading: "Your appointment was cancelled",
-      intro: "The appointment below is no longer scheduled. Contact us if you need help arranging another time.",
-    },
-  }[job.event_type];
+  const action = cancelled
+    ? { label: "Book another time", href: bookUrl }
+    : p.meeting_url && job.event_type !== "booking_received"
+      ? { label: "Join your session", href: p.meeting_url }
+      : { label: "View appointment", href: manageUrl };
 
-  const rows = [
-    ["When", `${date}, ${time}`],
+  const rows: [string, string][] = [
     ["With", p.therapist],
-    ["Service", p.service],
-    ["Format", modality],
+    ["Session", p.service],
+    ["Format", p.location_note ? `${modality}, ${p.location_note}` : modality],
     ["Reference", reference],
   ];
-  const htmlRows = rows
-    .map(([label, value]) => `<tr><td style="padding:8px 0;color:#637083;width:110px">${escapeHtml(label)}</td><td style="padding:8px 0;color:#111827;font-weight:600">${escapeHtml(value)}</td></tr>`)
+
+  const cell = (index: number) =>
+    `padding:12px 0;${index ? `border-top:1px solid ${b.line};` : ""}`;
+  const detailRows = rows
+    .map(
+      ([label, value], index) =>
+        `<tr><td style="${cell(index)}font-size:13px;color:${b.muted};width:96px;vertical-align:top">${escapeHtml(label)}</td><td style="${cell(index)}font-size:14px;font-weight:500;color:${b.ink}">${escapeHtml(value)}</td></tr>`,
+    )
     .join("");
-  const textRows = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
-  const meeting = p.meeting_url
-    ? `<p style="margin:24px 0"><a href="${escapeHtml(p.meeting_url)}" style="display:inline-block;background:#00d54b;color:#131316;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600">Open your session link</a></p>`
-    : "";
-  const manage = manageUrl
-    ? `<p style="margin:24px 0"><a href="${escapeHtml(manageUrl)}" style="color:#131316">Manage this appointment</a></p>`
-    : "";
-  const html = `<!doctype html><html><body style="margin:0;background:#f1f1f1;font-family:'DM Sans',Arial,sans-serif;color:#111827"><div style="max-width:600px;margin:32px auto;background:#fff;border:1px solid #e4e8ee;border-radius:18px;overflow:hidden"><div style="padding:28px 32px;background:#131316;color:#f1f1f1"><div style="font-size:15px;letter-spacing:.08em;text-transform:uppercase">Open Up Room</div></div><div style="padding:32px"><h1 style="font-size:28px;line-height:1.2;margin:0 0 12px">${escapeHtml(copy.heading)}</h1><p style="font-size:16px;line-height:1.6;margin:0 0 24px">Hi ${escapeHtml(p.name || "there")},</p><p style="font-size:16px;line-height:1.6;color:#465367">${escapeHtml(copy.intro)}</p><table style="width:100%;border-collapse:collapse;margin:24px 0;border-top:1px solid #e4e8ee;border-bottom:1px solid #e4e8ee">${htmlRows}</table>${meeting}${manage}<p style="font-size:13px;line-height:1.6;color:#637083;margin-top:32px">If you did not make this request, please reply to this email so we can check it.</p></div></div></body></html>`;
-  const text = `Open Up Room\n\n${copy.heading}\n\nHi ${p.name || "there"},\n\n${copy.intro}\n\n${textRows}\n${p.meeting_url ? `\nSession link: ${p.meeting_url}\n` : ""}${manageUrl ? `\nManage appointment: ${manageUrl}\n` : ""}\nIf you did not make this request, please reply to this email.`;
-  const attachments = job.event_type === "booking_cancelled"
+
+  const dot = cancelled ? "#a1a1a8" : b.signal;
+  const body = `      <p style="margin:0;font-family:${b.micro};font-size:11px;line-height:16px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:${b.muted}"><span style="display:inline-block;width:7px;height:7px;margin:0 9px 1px 0;background:${dot};border-radius:7px;vertical-align:middle"></span>${escapeHtml(copy.eyebrow)}</p>
+      <h1 class="h1" style="margin:20px 0 0;font-family:${b.font};font-size:28px;line-height:1.2;font-weight:600;letter-spacing:-.02em;color:${b.ink}">${escapeHtml(copy.heading)}</h1>
+      <p style="margin:18px 0 0;font-size:15px;line-height:1.65;color:${b.ink}">Hi ${escapeHtml(name)},</p>
+      <p style="margin:6px 0 0;font-size:15px;line-height:1.65;color:${b.muted}">${escapeHtml(copy.intro)}</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${b.page}" style="margin:32px 0 0;background:${b.page};border-radius:14px"><tr><td style="padding:24px 24px 10px">
+        <p style="margin:0;font-size:17px;line-height:1.35;font-weight:600;letter-spacing:-.01em;color:${b.ink}${cancelled ? ";text-decoration:line-through" : ""}">${escapeHtml(date)}</p>
+        <p style="margin:4px 0 14px;font-size:15px;line-height:1.5;color:${b.muted}">${escapeHtml(time)}</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ${b.line}">${detailRows}</table>
+      </td></tr></table>
+      ${action.href ? button(action.label, action.href) : ""}`;
+
+  const footer = `      <p style="margin:0">Questions? Reply to this email and a person will get back to you.</p>
+      <p style="margin:12px 0 0">${escapeHtml(b.name)} is not an emergency service. If you need help right now, see <a href="${escapeHtml(crisisUrl)}" style="color:${b.muted};text-decoration:underline">crisis support</a>.</p>
+      <p style="margin:12px 0 0"><a href="${escapeHtml(homeUrl)}" style="color:${b.muted};text-decoration:none">openuproom.com</a></p>`;
+
+  const html = layout({ preheader: copy.preheader, logoUrl, homeUrl, body, footer });
+
+  const text = [
+    b.name,
+    "",
+    copy.heading,
+    "",
+    `Hi ${name},`,
+    "",
+    copy.intro,
+    "",
+    date,
+    time,
+    ...rows.map(([label, value]) => `${label}: ${value}`),
+    "",
+    action.href ? `${action.label}: ${action.href}` : "",
+    "",
+    "Questions? Reply to this email.",
+    `${b.name} is not an emergency service. If you need help right now: ${crisisUrl}`,
+  ]
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n");
+
+  const attachments = cancelled
     ? []
     : [{ filename: `openuproom-${reference}.ics`, content: base64(buildIcs(job, siteUrl)) }];
 

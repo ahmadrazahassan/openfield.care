@@ -2,7 +2,8 @@
 
 Appointments now use a Supabase outbox. The database trigger adds an email job
 inside the same transaction as a booking or status change. The hosted
-`send-appointment-email` Edge Function runs every minute, claims jobs with a
+`send-appointment-email` Edge Function is woken the moment a job is queued
+(pg_net, after commit) and also runs every minute as a safety net. It claims jobs with a
 lease, sends the branded message through Resend, and marks it sent. A provider
 outage leaves the job queued and retries it with backoff; a booking is never
 lost because email was temporarily unavailable.
@@ -17,8 +18,15 @@ The following events are sent automatically:
 - **1 hour before**: "starting soon" reminder
 
 Reminders are queued by `enqueue_due_appointment_reminders()` on the
-`appointment-email-reminders` cron (every 5 minutes) and delivered by the same
-worker. A partial unique index guarantees one of each per booking.
+`appointment-email-reminders` cron (every minute) and delivered by the same
+worker. Each reminder records the start time it was for (`scheduled_for`): a
+unique index allows one of each per booking *per start time*, so a rescheduled
+session gets fresh reminders and a queued reminder for the old time is skipped.
+A 24-hour reminder that slips inside the last 2 hours is skipped too.
+
+Measured end to end (September 2026): booking, reschedule and cancellation
+emails reach Resend about 1 second after the change; reminders go out within
+5 seconds of their minute.
 
 Delivery states: `pending` → `sending` → `sent`. A permanent failure parks as
 `failed` after 8 attempts (about 1.5 hours of backoff) instead of retrying
