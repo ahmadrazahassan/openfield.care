@@ -39,3 +39,14 @@ test("cancellation email does not leave a stale calendar attachment", () => {
   assert.equal(rendered.subject, "Your Open Up Room appointment was cancelled");
   assert.equal(rendered.attachments.length, 0);
 });
+
+test("reminders render with their own copy and keep the calendar file", () => {
+  for (const [event, subject] of [
+    ["reminder_24h", "Reminder: your Open Up Room session is tomorrow"],
+    ["reminder_1h", "Starting soon: your Open Up Room session"],
+  ] as const) {
+    const rendered = renderAppointmentEmail(job(event));
+    assert.equal(rendered.subject, subject);
+    assert.equal(rendered.attachments.length, 1);
+  }
+});

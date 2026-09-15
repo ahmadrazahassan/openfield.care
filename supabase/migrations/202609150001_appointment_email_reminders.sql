@@ -1,0 +1,10 @@
+-- Applied to project uxjfzgkllqjqsdhnmiwa on 2026-09-15 as
+-- "appointment_email_reminders_and_hardening". Kept here so the repo matches
+-- production. See docs/APPOINTMENT-EMAIL-SETUP.md.
+--
+-- - reminder_24h / reminder_1h events, queued by enqueue_due_appointment_reminders()
+--   on the 'appointment-email-reminders' cron (every 5 minutes)
+-- - one reminder per booking (partial unique index)
+-- - 'failed' after 8 attempts instead of retrying forever
+-- - 'skipped' when an email is no longer true at send time
+-- - guest timezone taken from appointments.intake

@@ -13,6 +13,17 @@ The following events are sent automatically:
 - Status changed to `confirmed`: appointment confirmation
 - Time, therapist, service, or format changed: rescheduled details
 - Status changed to `cancelled`: cancellation notice
+- **24 hours before**: reminder (not sent if the booking was made inside that window)
+- **1 hour before**: "starting soon" reminder
+
+Reminders are queued by `enqueue_due_appointment_reminders()` on the
+`appointment-email-reminders` cron (every 5 minutes) and delivered by the same
+worker. A partial unique index guarantees one of each per booking.
+
+Delivery states: `pending` → `sending` → `sent`. A permanent failure parks as
+`failed` after 8 attempts (about 1.5 hours of backoff) instead of retrying
+forever. A job that stops being true before it sends — the booking was
+cancelled, or the session already started — is marked `skipped`.
 
 Each non-cancellation message includes an `.ics` calendar attachment. The
 worker reads the recipient from the booking, and only the service role can read
@@ -28,6 +39,7 @@ server-only secret:
 ```powershell
 npx supabase secrets set --project-ref uxjfzgkllqjqsdhnmiwa `
   'RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx' `
+  'SITE_URL=https://openuproom.com' `
   'RESEND_FROM_EMAIL=Open Up Room <hello@openuproom.com>'
 ```
 

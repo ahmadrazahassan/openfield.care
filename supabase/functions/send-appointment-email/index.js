@@ -91,6 +91,16 @@ function renderAppointmentEmail(job) {
       heading: "Your appointment details changed",
       intro: "Here are the latest details for your Open Up Room appointment."
     },
+    reminder_24h: {
+      subject: "Reminder: your Open Up Room session is tomorrow",
+      heading: "Your session is tomorrow",
+      intro: "A quick reminder of your appointment. If you can no longer make it, please let us know as soon as you can so the time can go to someone else."
+    },
+    reminder_1h: {
+      subject: "Starting soon: your Open Up Room session",
+      heading: "Your session starts in about an hour",
+      intro: "Take a moment to find somewhere quiet and private. Everything you need is below."
+    },
     booking_cancelled: {
       subject: "Your Open Up Room appointment was cancelled",
       heading: "Your appointment was cancelled",
@@ -106,9 +116,9 @@ function renderAppointmentEmail(job) {
   ];
   const htmlRows = rows.map(([label, value]) => `<tr><td style="padding:8px 0;color:#637083;width:110px">${escapeHtml(label)}</td><td style="padding:8px 0;color:#111827;font-weight:600">${escapeHtml(value)}</td></tr>`).join("");
   const textRows = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
-  const meeting = p.meeting_url ? `<p style="margin:24px 0"><a href="${escapeHtml(p.meeting_url)}" style="display:inline-block;background:#152238;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600">Open your session link</a></p>` : "";
-  const manage = manageUrl ? `<p style="margin:24px 0"><a href="${escapeHtml(manageUrl)}" style="color:#152238">Manage this appointment</a></p>` : "";
-  const html = `<!doctype html><html><body style="margin:0;background:#f5f7f9;font-family:Arial,sans-serif;color:#111827"><div style="max-width:600px;margin:32px auto;background:#fff;border:1px solid #e4e8ee;border-radius:18px;overflow:hidden"><div style="padding:28px 32px;background:#152238;color:#fff"><div style="font-size:15px;letter-spacing:.08em;text-transform:uppercase">Open Up Room</div></div><div style="padding:32px"><h1 style="font-size:28px;line-height:1.2;margin:0 0 12px">${escapeHtml(copy.heading)}</h1><p style="font-size:16px;line-height:1.6;margin:0 0 24px">Hi ${escapeHtml(p.name || "there")},</p><p style="font-size:16px;line-height:1.6;color:#465367">${escapeHtml(copy.intro)}</p><table style="width:100%;border-collapse:collapse;margin:24px 0;border-top:1px solid #e4e8ee;border-bottom:1px solid #e4e8ee">${htmlRows}</table>${meeting}${manage}<p style="font-size:13px;line-height:1.6;color:#637083;margin-top:32px">If you did not make this request, please reply to this email so we can check it.</p></div></div></body></html>`;
+  const meeting = p.meeting_url ? `<p style="margin:24px 0"><a href="${escapeHtml(p.meeting_url)}" style="display:inline-block;background:#00d54b;color:#131316;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600">Open your session link</a></p>` : "";
+  const manage = manageUrl ? `<p style="margin:24px 0"><a href="${escapeHtml(manageUrl)}" style="color:#131316">Manage this appointment</a></p>` : "";
+  const html = `<!doctype html><html><body style="margin:0;background:#f1f1f1;font-family:'DM Sans',Arial,sans-serif;color:#111827"><div style="max-width:600px;margin:32px auto;background:#fff;border:1px solid #e4e8ee;border-radius:18px;overflow:hidden"><div style="padding:28px 32px;background:#131316;color:#f1f1f1"><div style="font-size:15px;letter-spacing:.08em;text-transform:uppercase">Open Up Room</div></div><div style="padding:32px"><h1 style="font-size:28px;line-height:1.2;margin:0 0 12px">${escapeHtml(copy.heading)}</h1><p style="font-size:16px;line-height:1.6;margin:0 0 24px">Hi ${escapeHtml(p.name || "there")},</p><p style="font-size:16px;line-height:1.6;color:#465367">${escapeHtml(copy.intro)}</p><table style="width:100%;border-collapse:collapse;margin:24px 0;border-top:1px solid #e4e8ee;border-bottom:1px solid #e4e8ee">${htmlRows}</table>${meeting}${manage}<p style="font-size:13px;line-height:1.6;color:#637083;margin-top:32px">If you did not make this request, please reply to this email so we can check it.</p></div></div></body></html>`;
   const text = `Open Up Room
 
 ${copy.heading}
