@@ -12,7 +12,7 @@ import { JOURNAL_COVERS, IMAGE_QUALITY } from "@/content/assets";
 export const metadata: Metadata = {
   title: "Journal",
   description:
-    "Writing from the Openfield practice on starting therapy, burnout, sleep, relationships and grief.",
+    "Writing from the Open Up Room practice on starting therapy, burnout, sleep, relationships and grief.",
   alternates: { canonical: "/journal" },
 };
 

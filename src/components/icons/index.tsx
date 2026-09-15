@@ -2,7 +2,7 @@ import type { SVGProps } from "react";
 import { GENERATED_ICONS } from "./generated";
 
 /**
- * OPENFIELD ICON SYSTEM
+ * OPEN UP ROOM ICON SYSTEM
  * ---------------------------------------------------------------------------
  * The 24 concept and product icons come from the generated vector set
  * (public/icons/*.svg -> ./generated.tsx). Do not hand-edit those; edit the

@@ -1,7 +1,7 @@
 from pathlib import Path
 import zipfile
 root=Path.cwd()
-target=root/'output'/'openfield-assets.zip'
+target=root/'output'/'openuproom-assets.zip'
 with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
     for dirname in ['public','content','components/icons']:
         for f in sorted((root/dirname).rglob('*')):

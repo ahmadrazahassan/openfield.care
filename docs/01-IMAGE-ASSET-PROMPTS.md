@@ -1,6 +1,6 @@
-# Openfield — Image, Illustration & Icon Generation Brief
+# Open Up Room — Image, Illustration & Icon Generation Brief
 
-**Purpose of this file.** Every visual asset the Openfield website needs, as a ready-to-paste generation prompt. Filenames here are a **contract** with `02-WEBSITE-BUILD-PROMPT.md` — the build file imports these exact paths. Generate, export at the stated size, drop into `/public/...` at the stated path, done.
+**Purpose of this file.** Every visual asset the Open Up Room website needs, as a ready-to-paste generation prompt. Filenames here are a **contract** with `02-WEBSITE-BUILD-PROMPT.md` — the build file imports these exact paths. Generate, export at the stated size, drop into `/public/...` at the stated path, done.
 
 **Reference DNA this brief encodes:** flat editorial vector illustration (thin dark outline, flat fill, halftone, solid black shadow), monoline 24px icons, one high-concept B&W conceptual photograph, calm wide-open landscape photography, torn-paper footer edge, deep-green diagonal split.
 
@@ -75,10 +75,10 @@ Generate all of these. Paths are exact.
 ```
 public/
 ├─ brand/
-│  ├─ openfield-wordmark.svg          E1
-│  ├─ openfield-wordmark-light.svg    E1 (off-white version for dark bands)
-│  ├─ openfield-mark.svg              E2  (knot → horizon line)
-│  ├─ openfield-mark-light.svg        E2
+│  ├─ openuproom-wordmark.svg          E1
+│  ├─ openuproom-wordmark-light.svg    E1 (off-white version for dark bands)
+│  ├─ openuproom-mark.svg              E2  (knot → horizon line)
+│  ├─ openuproom-mark-light.svg        E2
 │  ├─ favicon.svg / favicon-32.png / apple-touch-icon-180.png / icon-512.png   E3
 │  └─ og-default.jpg                  E4
 ├─ images/
@@ -529,12 +529,12 @@ no colour, no gradient, no sparkle or star or lightning shapes.
 ## E. Brand identity
 
 ### E1 — Wordmark
-**Files:** `public/brand/openfield-wordmark.svg` (ink `#131316`), `openfield-wordmark-light.svg` (off-white `#F1F1F1`)
+**Files:** `public/brand/openuproom-wordmark.svg` (ink `#131316`), `openuproom-wordmark-light.svg` (off-white `#F1F1F1`)
 
 **Do not AI-generate this. Set it as type and outline it.**
 
 ```
-Word:            openfield
+Word:            open up room
 Case:            all lowercase
 Typeface:        Montserrat Alternates, SemiBold (600)
 Tracking:        -0.02em
@@ -548,7 +548,7 @@ Export:          outlined paths, single compound path per colour, viewBox tight 
 The green full stop is the only place the brand mark uses colour. It is the entire logo system's signature — never render the wordmark fully green, never reverse it, never outline it.
 
 ### E2 — Symbol / app mark
-**Files:** `public/brand/openfield-mark.svg`, `openfield-mark-light.svg` · **Square, 24×24 and 512×512 masters**
+**Files:** `public/brand/openuproom-mark.svg`, `openuproom-mark-light.svg` · **Square, 24×24 and 512×512 masters**
 
 ```
 Concept:  a single continuous line that enters at the left as a small tight tangled knot,
@@ -581,7 +581,7 @@ icon-512.png             512×512, maskable, ink mark on solid #F1F1F1, 20% safe
 **File:** `public/brand/og-default.jpg` · **1200 × 630** · Composite in code or a design tool, not generated.
 ```
 Background:  solid #F1F1F1, absolutely flat, no texture, no gradient
-Mark:        openfield wordmark (E1) in #131316, left-aligned, 72px cap height,
+Mark:        open up room wordmark (E1) in #131316, left-aligned, 72px cap height,
              positioned at x=80 y=80
 Headline:    "Room to think." — DM Sans, 84px, weight 500, tracking -0.03em, #131316,
              left-aligned, baseline at y=390
@@ -596,7 +596,7 @@ Per-page OG images should follow the same template with the page title swapped i
 
 ## F. People
 
-> **Compliance note — read before generating.** Openfield is a healthcare brand. Presenting AI-generated faces as named, credentialled clinicians is misleading and in several jurisdictions unlawful. Generate these **as layout placeholders only**, watermark them internally as `PLACEHOLDER`, and replace every one with a photograph of the real practitioner before the site goes live. The same applies to testimonial avatars — no invented patients.
+> **Compliance note — read before generating.** Open Up Room is a healthcare brand. Presenting AI-generated faces as named, credentialled clinicians is misleading and in several jurisdictions unlawful. Generate these **as layout placeholders only**, watermark them internally as `PLACEHOLDER`, and replace every one with a photograph of the real practitioner before the site goes live. The same applies to testimonial avatars — no invented patients.
 
 ### F1 — Practitioner portraits (×6)
 **Files:** `public/images/team/therapist-01.jpg` … `therapist-06.jpg` · **1200 × 1500 (4:5)**

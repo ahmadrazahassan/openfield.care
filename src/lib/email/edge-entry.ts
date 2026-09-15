@@ -70,7 +70,7 @@ Deno.serve(async request => {
     const db = createClient(supabaseUrl, serviceRoleKey, {
       auth: { persistSession: false, autoRefreshToken: false },
     });
-    const siteUrl = Deno.env.get("SITE_URL") || Deno.env.get("NEXT_PUBLIC_SITE_URL") || "https://openfield.care";
+    const siteUrl = Deno.env.get("SITE_URL") || Deno.env.get("NEXT_PUBLIC_SITE_URL") || "https://openuproom.com";
     let sent = 0;
     let failed = 0;
     for (let count = 0; count < 25; count += 1) {

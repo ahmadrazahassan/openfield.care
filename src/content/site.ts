@@ -1,12 +1,12 @@
 export const SITE = {
-  name: "Openfield",
-  wordmark: "openfield",
-  legalName: "Openfield Care Ltd.",
+  name: "Open Up Room",
+  wordmark: "open up room",
+  legalName: "Open Up Room Ltd.",
   tagline: "Room to think.",
   description:
     "Licensed therapists, booked in minutes. Video, phone, or in person. Fifty-minute sessions, the same therapist each week, free cancellation up to 24 hours.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://openfield.care",
-  email: "hello@openfield.care",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://openuproom.com",
+  email: "hello@openuproom.com",
   phone: "+442079460112",
   phoneDisplay: "020 7946 0112",
   address: {
@@ -69,7 +69,7 @@ export const FOOTER_NAV = [
 ] as const;
 
 export const SAFETY_NOTICE =
-  "Openfield is not an emergency service. If you need help right now, see crisis support.";
+  "Open Up Room is not an emergency service. If you need help right now, see crisis support.";
 
 export const SAFETY_NOTICE_LONG =
-  "Openfield is not an emergency or crisis service. If you are in immediate danger, or you are thinking about harming yourself, please use crisis support or contact your local emergency number.";
+  "Open Up Room is not an emergency or crisis service. If you are in immediate danger, or you are thinking about harming yourself, please use crisis support or contact your local emergency number.";

@@ -6,7 +6,7 @@ import { signUp } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
   title: "Create an account",
-  description: "Optional account for keeping your Openfield sessions together.",
+  description: "Optional account for keeping your Open Up Room sessions together.",
   robots: { index: false, follow: false },
 };
 

@@ -6,7 +6,7 @@ import { SITE } from "@/content/site";
 export const metadata: Metadata = {
   title: "Crisis support",
   description:
-    "Openfield is not an emergency service. If you need help right now, these are faster routes to it.",
+    "Open Up Room is not an emergency service. If you need help right now, these are faster routes to it.",
   alternates: { canonical: "/crisis-support" },
   robots: { index: true, follow: true },
 };

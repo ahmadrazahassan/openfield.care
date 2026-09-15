@@ -44,7 +44,7 @@ const knot='M2 13C8 4 9 18 4 15C0 12 9 6 9 11C9 17 2 9 6 8C10 6 9 15 12 13C14 10
 const simple='M2 13C6 5 11 16 5 15C1 14 6 8 9 10C11 12 11 14 14 12H22';
 for(const [suffix,color] of [['','#131316'],['-light','#F1F1F1']])for(const size of [24,512]){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" color="${color}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="${knot}"/></svg>`;
- out(`public/brand/openfield-mark${suffix}${size===512?'-512':''}.svg`,svg);
+ out(`public/brand/openuproom-mark${suffix}${size===512?'-512':''}.svg`,svg);
 }
 out('public/brand/favicon.svg',`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><style>:root{color:#131316}@media(prefers-color-scheme:dark){:root{color:#f1f1f1}}</style><path d="${simple}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
 (async()=>{

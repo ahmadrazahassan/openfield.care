@@ -28,7 +28,7 @@ server-only secret:
 ```powershell
 npx supabase secrets set --project-ref uxjfzgkllqjqsdhnmiwa `
   'RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx' `
-  'RESEND_FROM_EMAIL=Openfield <hello@openfield.care>'
+  'RESEND_FROM_EMAIL=Open Up Room <hello@openuproom.com>'
 ```
 
 The migration, function deployment, and `appointment-email-sync` cron job are

@@ -13,7 +13,7 @@ import { SITE } from "@/content/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Openfield is a mental health consultancy. Registered practitioners, fifty-minute sessions, and a booking process that does not make you explain yourself twice.",
+    "Open Up Room is a mental health consultancy. Registered practitioners, fifty-minute sessions, and a booking process that does not make you explain yourself twice.",
   alternates: { canonical: "/about" },
 };
 
@@ -49,7 +49,7 @@ export default async function AboutPage() {
       <PageHero
         eyebrow="About"
         title="A consultancy, not a platform."
-        lead="Openfield exists because getting to a good therapist is harder than it should be, and most of the difficulty is administrative rather than clinical."
+        lead="Open Up Room exists because getting to a good therapist is harder than it should be, and most of the difficulty is administrative rather than clinical."
       />
 
       <Section bg="paper">

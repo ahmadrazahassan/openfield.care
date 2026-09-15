@@ -37,13 +37,13 @@ function buildIcs(job, siteUrl) {
     try {
       return new URL(siteUrl).hostname;
     } catch {
-      return "openfield.care";
+      return "openuproom.com";
     }
   })();
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Openfield//Appointments//EN",
+    "PRODID:-//Open Up Room//Appointments//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
@@ -52,7 +52,7 @@ function buildIcs(job, siteUrl) {
     `DTSTART:${stamp(p.starts_at)}`,
     `DTEND:${stamp(p.ends_at)}`,
     fold(`SUMMARY:${p.service} with ${p.therapist}`),
-    fold(`DESCRIPTION:Openfield appointment ${p.reference}.`),
+    fold(`DESCRIPTION:Open Up Room appointment ${p.reference}.`),
     "END:VEVENT",
     "END:VCALENDAR"
   ].join("\r\n");
@@ -67,7 +67,7 @@ function renderAppointmentEmail(job) {
   const time = `${formatTime(p.starts_at, timezone)} \u2013 ${formatTime(p.ends_at, timezone)}`;
   const modality = modalityLabels[p.modality] || p.modality;
   const reference = p.reference;
-  const siteUrl = p.site_url || "https://openfield.care";
+  const siteUrl = p.site_url || "https://openuproom.com";
   const manageUrl = (() => {
     try {
       return new URL("/account/appointments", siteUrl).toString();
@@ -79,20 +79,20 @@ function renderAppointmentEmail(job) {
     booking_received: {
       subject: "We received your appointment request",
       heading: "Your appointment request is in",
-      intro: "Thanks for choosing Openfield. We have held this time while the practice confirms your appointment."
+      intro: "Thanks for choosing Open Up Room. We have held this time while the practice confirms your appointment."
     },
     booking_confirmed: {
-      subject: "Your Openfield appointment is confirmed",
+      subject: "Your Open Up Room appointment is confirmed",
       heading: "Your appointment is confirmed",
       intro: "Everything is set. We look forward to seeing you."
     },
     booking_rescheduled: {
-      subject: "Your Openfield appointment was updated",
+      subject: "Your Open Up Room appointment was updated",
       heading: "Your appointment details changed",
-      intro: "Here are the latest details for your Openfield appointment."
+      intro: "Here are the latest details for your Open Up Room appointment."
     },
     booking_cancelled: {
-      subject: "Your Openfield appointment was cancelled",
+      subject: "Your Open Up Room appointment was cancelled",
       heading: "Your appointment was cancelled",
       intro: "The appointment below is no longer scheduled. Contact us if you need help arranging another time."
     }
@@ -108,8 +108,8 @@ function renderAppointmentEmail(job) {
   const textRows = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
   const meeting = p.meeting_url ? `<p style="margin:24px 0"><a href="${escapeHtml(p.meeting_url)}" style="display:inline-block;background:#152238;color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600">Open your session link</a></p>` : "";
   const manage = manageUrl ? `<p style="margin:24px 0"><a href="${escapeHtml(manageUrl)}" style="color:#152238">Manage this appointment</a></p>` : "";
-  const html = `<!doctype html><html><body style="margin:0;background:#f5f7f9;font-family:Arial,sans-serif;color:#111827"><div style="max-width:600px;margin:32px auto;background:#fff;border:1px solid #e4e8ee;border-radius:18px;overflow:hidden"><div style="padding:28px 32px;background:#152238;color:#fff"><div style="font-size:15px;letter-spacing:.08em;text-transform:uppercase">Openfield</div></div><div style="padding:32px"><h1 style="font-size:28px;line-height:1.2;margin:0 0 12px">${escapeHtml(copy.heading)}</h1><p style="font-size:16px;line-height:1.6;margin:0 0 24px">Hi ${escapeHtml(p.name || "there")},</p><p style="font-size:16px;line-height:1.6;color:#465367">${escapeHtml(copy.intro)}</p><table style="width:100%;border-collapse:collapse;margin:24px 0;border-top:1px solid #e4e8ee;border-bottom:1px solid #e4e8ee">${htmlRows}</table>${meeting}${manage}<p style="font-size:13px;line-height:1.6;color:#637083;margin-top:32px">If you did not make this request, please reply to this email so we can check it.</p></div></div></body></html>`;
-  const text = `Openfield
+  const html = `<!doctype html><html><body style="margin:0;background:#f5f7f9;font-family:Arial,sans-serif;color:#111827"><div style="max-width:600px;margin:32px auto;background:#fff;border:1px solid #e4e8ee;border-radius:18px;overflow:hidden"><div style="padding:28px 32px;background:#152238;color:#fff"><div style="font-size:15px;letter-spacing:.08em;text-transform:uppercase">Open Up Room</div></div><div style="padding:32px"><h1 style="font-size:28px;line-height:1.2;margin:0 0 12px">${escapeHtml(copy.heading)}</h1><p style="font-size:16px;line-height:1.6;margin:0 0 24px">Hi ${escapeHtml(p.name || "there")},</p><p style="font-size:16px;line-height:1.6;color:#465367">${escapeHtml(copy.intro)}</p><table style="width:100%;border-collapse:collapse;margin:24px 0;border-top:1px solid #e4e8ee;border-bottom:1px solid #e4e8ee">${htmlRows}</table>${meeting}${manage}<p style="font-size:13px;line-height:1.6;color:#637083;margin-top:32px">If you did not make this request, please reply to this email so we can check it.</p></div></div></body></html>`;
+  const text = `Open Up Room
 
 ${copy.heading}
 
@@ -124,7 +124,7 @@ Session link: ${p.meeting_url}
 Manage appointment: ${manageUrl}
 ` : ""}
 If you did not make this request, please reply to this email.`;
-  const attachments = job.event_type === "booking_cancelled" ? [] : [{ filename: `openfield-${reference}.ics`, content: base64(buildIcs(job, siteUrl)) }];
+  const attachments = job.event_type === "booking_cancelled" ? [] : [{ filename: `openuproom-${reference}.ics`, content: base64(buildIcs(job, siteUrl)) }];
   return { subject: copy.subject, html, text, attachments };
 }
 
@@ -184,7 +184,7 @@ Deno.serve(async (request) => {
     const db = createClient(supabaseUrl, serviceRoleKey, {
       auth: { persistSession: false, autoRefreshToken: false }
     });
-    const siteUrl = Deno.env.get("SITE_URL") || Deno.env.get("NEXT_PUBLIC_SITE_URL") || "https://openfield.care";
+    const siteUrl = Deno.env.get("SITE_URL") || Deno.env.get("NEXT_PUBLIC_SITE_URL") || "https://openuproom.com";
     let sent = 0;
     let failed = 0;
     for (let count = 0; count < 25; count += 1) {

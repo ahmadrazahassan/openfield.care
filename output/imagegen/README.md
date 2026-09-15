@@ -1,4 +1,4 @@
-# Openfield image assets
+# Open Up Room image assets
 
 Created from `01-IMAGE-ASSET-PROMPTS.md` with the built-in image generation tool. The complete normalized prompt set is in `prompts.json`; original generated PNGs are preserved in `originals/`. No API-key or CLI generation was used.
 

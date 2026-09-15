@@ -1,5 +1,5 @@
 /** Logo shapes recreated from the supplied visual reference.
- * These are design placeholders, not verified Openfield partnerships.
+ * These are design placeholders, not verified Open Up Room partnerships.
  */
 export type Partner = {
   name: string;

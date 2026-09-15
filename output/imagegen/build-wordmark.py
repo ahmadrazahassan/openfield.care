@@ -19,12 +19,12 @@ def outline(f,text,size,x=0,y=0,tracking=0):
         x+=g.width*scale+tracking*size
     return pen.getCommands(),x
 semi=font('MontserratAlternates-SemiBold.ttf')
-word,x=outline(semi,'openfield',100,tracking=-.02)
+word,x=outline(semi,'open up room',100,tracking=-.02)
 dot,_=outline(semi,'.',100,x)
 for suffix,color in [('', '#131316'),('-light','#F1F1F1')]:
-    (OUT/f'openfield-wordmark{suffix}.svg').write_text(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -82 {x+26:.2f} 105"><path fill="{color}" d="{word}"/><path fill="#00D54B" d="{dot}"/></svg>')
+    (OUT/f'openuproom-wordmark{suffix}.svg').write_text(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -82 {x+26:.2f} 105"><path fill="{color}" d="{word}"/><path fill="#00D54B" d="{dot}"/></svg>')
 cap=semi['OS/2'].sCapHeight/semi['head'].unitsPerEm
-w,x=outline(semi,'openfield',72/cap,80,152,tracking=-.02)
+w,x=outline(semi,'open up room',72/cap,80,152,tracking=-.02)
 d,_=outline(semi,'.',72/cap,x,152)
 h,_=outline(font('DMSans.ttf',500),'Room to think.',84,80,390,tracking=-.03)
 m,_=outline(font('MontserratAlternates-Medium.ttf'),'LICENSED THERAPY · BOOK IN MINUTES',20,80,535,tracking=.14)

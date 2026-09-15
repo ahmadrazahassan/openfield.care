@@ -1,4 +1,4 @@
-# Openfield — Complete Website Build Specification
+# Open Up Room — Complete Website Build Specification
 
 > **How to use this file.** Paste it into Claude Code (or hand it to a senior developer) as the single source of truth. Build it in the phase order given in §17. Do not deviate from §3 (Non-negotiables) or §4 (Design system) without an explicit decision recorded in the repo.
 
@@ -14,13 +14,15 @@ You are not decorating. Every element on the page must justify its existence.
 
 ## 1. The brand
 
-### Name: **Openfield**
+### Name: **Open Up Room**
 
-**Domain:** `openfield.care` · **Legal entity in footer:** Openfield Care Ltd. · **Wordmark:** `openfield.` — all lowercase, with a green full stop.
+**Domain:** `openuproom.com` · **Legal entity in footer:** Open Up Room Ltd. · **Wordmark:** `open up room.` — all lowercase, with a green full stop.
 
-**Why this name.** The reference imagery kept returning to one idea: a person alone in a wide-open green field, with nothing crowding them. That is exactly what therapy sells — not a fix, but space. "Openfield" says it in one word, works as a noun and a place, sounds like somewhere you'd go rather than something you'd subscribe to, and is completely free of the wellness-tech naming clichés (no *-ly*, no *-ology*, no *Mind-*, no invented Latin, nothing that sounds like a model release). It also gives us a mark that draws itself: a tangled line that unravels into a flat horizon.
+**Why this name.** Therapy begins the moment someone opens up, and that only happens somewhere that feels safe to do it. "Open Up Room" names both halves at once — the act (*opening up*) and the place (*a room* for it) — so the brand explains itself without a tagline doing the work. It reads as somewhere you go rather than something you subscribe to, and it stays clear of wellness-tech naming clichés (no *-ly*, no *-ology*, no *Mind-*, nothing that sounds like a model release).
 
-Alternates considered and rejected: **Unknot** (great metaphor, reads slightly cute), **The Clearing** (beautiful, poor domain and search position), **Northlight** (already crowded in wellness).
+The mark still fits: a tangled line that unravels into a flat horizon — what opening up feels like from the inside.
+
+*Renamed from the working name "Openfield", whose .com was unavailable. Alternates considered: Headroom, Mind Unknot, Calmfield.*
 
 ### Positioning
 A mental-health consultancy. Licensed therapists, real appointments, video / phone / in person. It is a booking product wrapped in an editorial brand — not a content site, not a meditation app, not a chatbot.
@@ -52,7 +54,7 @@ npm view next version && npm view react version && npm view tailwindcss version
 | Language | **TypeScript**, `strict: true` | `noUncheckedIndexedAccess: true` too. |
 | React | **React 19+** | Server Actions for all mutations. |
 | Styling | **Tailwind CSS v4** (CSS-first `@theme`) | No `tailwind.config.js` colours — tokens live in CSS. |
-| Components | **shadcn/ui** (Tailwind v4-compatible release) | Restyle every primitive to the Openfield system. Do not ship default shadcn look. |
+| Components | **shadcn/ui** (Tailwind v4-compatible release) | Restyle every primitive to the Open Up Room system. Do not ship default shadcn look. |
 | Database / Auth / Storage | **Supabase** (already connected) | `@supabase/supabase-js` + `@supabase/ssr`. |
 | Forms | **react-hook-form** + **zod** + `@hookform/resolvers` | One zod schema per form, shared client & server. |
 | Dates | **date-fns** + **@date-fns/tz** | All storage in UTC `timestamptz`; all display in the user's IANA zone. |
@@ -67,7 +69,7 @@ npm view next version && npm view react version && npm view tailwindcss version
 
 **Scaffold:**
 ```bash
-npx create-next-app@latest openfield --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
+npx create-next-app@latest open up room --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
 ```
 
 ---
@@ -87,7 +89,7 @@ These are hard constraints. A build that violates any of them is rejected.
 
 ### Content & ethics
 8. **No fabricated credentials, testimonials, statistics or clinician identities.** All placeholder people, quotes and numbers must be visibly marked in seed data (`is_placeholder: true`) and blocked from production by a build-time check.
-9. **Crisis safety is a required feature, not a footnote.** Every page carries a route to `/crisis-support`; the booking flow and contact form state plainly that Openfield is not an emergency service. Emergency numbers must be region-verified before launch — leave them as `TODO(region)` placeholders rather than inventing them.
+9. **Crisis safety is a required feature, not a footnote.** Every page carries a route to `/crisis-support`; the booking flow and contact form state plainly that Open Up Room is not an emergency service. Emergency numbers must be region-verified before launch — leave them as `TODO(region)` placeholders rather than inventing them.
 10. **No third-party tracking pixels, no session replay, no ad tech.** Health-adjacent browsing is sensitive by default.
 
 ### Engineering
@@ -839,7 +841,7 @@ The homepage is the reference build. Match the described architecture exactly; o
 Sticky, `--color-page` at 88% with `backdrop-blur(8px)` — this is the **only** blur in the system and it is on a solid-ish bar, not a glass card. A 1px `--color-ink-12` bottom border appears only after 24px of scroll.
 
 Layout: logo left · centred pill nav · CTA right.
-- Logo: `openfield-mark.svg` + wordmark, 28px height.
+- Logo: `openuproom-mark.svg` + wordmark, 28px height.
 - Pill nav: a `--radius-pill` container with 1px `--color-ink-12` border and `--color-paper` fill, items in Montserrat Alternates 500, 0.875rem. Active item gets a solid `--color-ink` pill with `--color-page` text. Items: About · Services · Therapists · Journal · Contact.
 - CTA: primary green pill "Book a session" with the circular arrow badge.
 - Mobile: logo left, hamburger right → full-screen sheet, `--color-page`, large DM Sans links stacked at `--text-d3`, CTA pinned to the bottom, crisis link beneath it.
@@ -854,7 +856,7 @@ Inside, on a 12-col grid with 48px padding:
   > to work things
   > out.
 - **Right column** (cols 8–12, vertically bottom-aligned): a 2-sentence lead in `--color-on-image` at 85% opacity, then the primary CTA.
-  > "Openfield matches you with a licensed therapist, usually within three minutes. Video, phone, or in a room — you set the pace."
+  > "Open Up Room matches you with a licensed therapist, usually within three minutes. Video, phone, or in a room — you set the pace."
 - **CTA row:** primary "Book a session" (green + circular arrow) and a ghost-on-image "How it works".
 - **Bottom-left stat:** overlapping avatar ring (`avatar-01`…`05`, 40px, 2px `--color-on-image` ring, −10px overlap) + `12,400+` in DM Sans 500 at `--text-d3` + "sessions held" in micro-caps.
 - Mobile: swap to `hero-open-field-mobile.jpg`, stack everything, H1 at `--text-d1` min, hide the avatar ring below 480px.
@@ -900,7 +902,7 @@ Beneath, three small stat blocks separated by hairlines: `3 min` average match t
 ### 07 — For teams (ref 7, the diagonal)
 Full-bleed. `--color-sand` above a **hard diagonal edge** into `--color-forest` (achieved with a CSS `clip-path` polygon at roughly 12° — no SVG needed, no gradient). `illo-diagonal-rider.svg` is absolutely positioned so the figure rides the seam. Two small line doodles (sun, leaf) sit in the sand area.
 
-Content in the sand region, left-aligned: eyebrow "OPENFIELD FOR TEAMS", H2 "Mental health cover your team will actually use.", two lines of body, ghost CTA "See team plans" → `/for-teams`.
+Content in the sand region, left-aligned: eyebrow "OPEN UP ROOM FOR TEAMS", H2 "Mental health cover your team will actually use.", two lines of body, ghost CTA "See team plans" → `/for-teams`.
 Content in the forest region, right-aligned, `--color-page` text: three short bullets with monoline icons in `--color-page`.
 
 ### 08 — Therapists
@@ -911,7 +913,7 @@ Horizontal scroll rail (snap) on mobile, 4-up grid on desktop. Card: 4:5 portrai
 Full-bleed inset card, `--radius-xl`, `editorial-bigtype-field.jpg`, min-height 70vh, flat scrim at 18%.
 - Two lines of micro-caps centred at the top, `--color-on-image` at 80%:
   `SURELY, WITHOUT A DOUBT` / `IT PASSES. IT ALWAYS HAS.`
-- The word **`openfield.`** at `--text-mega`, DM Sans 500, tracking −0.05em, `--color-on-image`, optically centred, with the full stop in `--color-signal`.
+- The word **`open up room.`** at `--text-mega`, DM Sans 500, tracking −0.05em, `--color-on-image`, optically centred, with the full stop in `--color-signal`.
 - Bottom-left micro-caps: `EST. 2026 — LICENSED CARE`. Bottom-right: `ROOM TO THINK`.
 Nothing else in this section. No button, no body copy. It is a breath.
 
@@ -934,15 +936,15 @@ This is a set piece. Build it exactly:
 1. A full-bleed `editorial-footer-field.jpg` block, `min-height: 520px`, `object-position: center bottom`.
 2. `texture-torn-edge.png` composited across the **top** edge of that block as a CSS `mask` on a `--color-page` element — so the page background appears to tear away and reveal the photograph. It tiles horizontally and never distorts.
 3. Footer content sits **over** the photo in its upper region, where the grass is calm:
-   - **Left column:** `openfield-mark.svg` + wordmark in light, then one line: "Licensed therapy and consultation. Room to think."
+   - **Left column:** `openuproom-mark.svg` + wordmark in light, then one line: "Licensed therapy and consultation. Room to think."
    - **Four nav columns**, right-aligned as a group: headings in micro-caps `--color-on-image` at 70%, links in Open Sans 0.875rem `--color-on-image`.
      - **Company** — About · Careers · Contact · Press
      - **Care** — Individual therapy · Couples · Young people · Assessments · For teams
      - **Resources** — Journal · Guides · FAQ · Crisis support
      - **Legal** — Privacy · Terms · Cookies · Accessibility
-4. Bottom: a centred line in micro-caps, `--color-on-image` at 60% — `© 2026 OPENFIELD CARE LTD. ALL RIGHTS RESERVED.`
+4. Bottom: a centred line in micro-caps, `--color-on-image` at 60% — `© 2026 OPEN UP ROOM CARE LTD. ALL RIGHTS RESERVED.`
 5. Directly above the copyright, a centred one-line safety notice in `--color-on-image` at 80%:
-   *"Openfield is not an emergency service. If you need help right now, see crisis support."* — with "crisis support" as an underlined link.
+   *"Open Up Room is not an emergency service. If you need help right now, see crisis support."* — with "crisis support" as an underlined link.
 
 The person at the desk in the photograph must remain visible and uncovered — position the nav columns above them.
 
@@ -1009,7 +1011,7 @@ The person at the desk in the photograph must remain visible and uncovered — p
 
 ## 13. SEO & metadata
 
-- `metadata` export per route; title template `%s — Openfield`; canonical URLs.
+- `metadata` export per route; title template `%s — Open Up Room`; canonical URLs.
 - Dynamic OG images via `next/og` at `/api/og?title=…&kicker=…`, rendering the E4 template from the image brief.
 - JSON-LD: `Organization` + `MedicalBusiness` (root), `Person` (therapist pages), `Service` (service pages), `Article` (journal), `FAQPage` (FAQ), `BreadcrumbList` (all nested routes).
 - `sitemap.ts` and `robots.ts` generated from Supabase content.
@@ -1037,9 +1039,9 @@ Means: Server Components by default; `next/font` with `display: swap` and preloa
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=          # server only — never imported into a client module
-NEXT_PUBLIC_SITE_URL=https://openfield.care
+NEXT_PUBLIC_SITE_URL=https://openuproom.com
 RESEND_API_KEY=
-RESEND_FROM_EMAIL="Openfield <hello@openfield.care>"
+RESEND_FROM_EMAIL="Open Up Room <hello@openuproom.com>"
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
 CRON_SECRET=                        # guards the reminder route
@@ -1053,11 +1055,11 @@ Validate at boot with a zod schema in `lib/env.ts` so a missing variable fails t
 
 Every string below is production copy. Do not write lorem ipsum; do not invent replacements without cause.
 
-**Meta title:** `Openfield — Room to think.`
+**Meta title:** `Open Up Room — Room to think.`
 **Meta description:** `Licensed therapists, booked in minutes. Video, phone, or in person. Fifty-minute sessions, same therapist each week, free cancellation up to 24 hours.`
 
 **Hero H1:** `A quieter place to work things out.`
-**Hero lead:** `Openfield matches you with a licensed therapist, usually within three minutes. Video, phone, or in a room — you set the pace.`
+**Hero lead:** `Open Up Room matches you with a licensed therapist, usually within three minutes. Video, phone, or in a room — you set the pace.`
 **Primary CTA:** `Book a session` · **Secondary:** `How it works`
 **Stat:** `12,400+ sessions held` *(replace with the real figure or remove — see §3.8)*
 
@@ -1077,12 +1079,12 @@ Every string below is production copy. Do not write lorem ipsum; do not invent r
 - Confirming: `Holding your slot…`
 - Success: `You're booked. We've emailed the details and a calendar file.`
 - Cancellation policy: `Move or cancel free up to 24 hours before. After that we ask that you let your therapist know.`
-- Non-emergency notice: `Openfield is not an emergency service. If you're in immediate danger or thinking about harming yourself, please use crisis support.`
+- Non-emergency notice: `Open Up Room is not an emergency service. If you're in immediate danger or thinking about harming yourself, please use crisis support.`
 
 **Consent checkboxes (booking step 4):**
-- `I understand that Openfield is not an emergency or crisis service.` *(required)*
+- `I understand that Open Up Room is not an emergency or crisis service.` *(required)*
 - `I agree to the Terms and the Privacy Notice.` *(required)*
-- `Send me occasional writing from the Openfield journal.` *(optional, default off)*
+- `Send me occasional writing from the Open Up Room journal.` *(optional, default off)*
 
 **Empty states:**
 - No appointments: `Nothing in the diary yet.` / `When you book a session it'll show up here, with everything you need to join it.`
@@ -1169,8 +1171,8 @@ Manual checklist:
 The build imports these exact paths. If any is missing, the page must fail loudly in development rather than render a broken image.
 
 ```
-brand/openfield-wordmark.svg · openfield-wordmark-light.svg · openfield-mark.svg
-brand/openfield-mark-light.svg · favicon.svg · favicon-32.png
+brand/openuproom-wordmark.svg · openuproom-wordmark-light.svg · openuproom-mark.svg
+brand/openuproom-mark-light.svg · favicon.svg · favicon-32.png
 brand/apple-touch-icon-180.png · icon-512.png · og-default.jpg
 
 images/hero/hero-open-field.jpg · hero-open-field-mobile.jpg · hero-consult-room.jpg

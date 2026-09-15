@@ -6,7 +6,7 @@ import { signIn } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
   title: "Sign in",
-  description: "Sign in to see your Openfield sessions.",
+  description: "Sign in to see your Open Up Room sessions.",
   robots: { index: false, follow: false },
 };
 

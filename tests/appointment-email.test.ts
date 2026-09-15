@@ -20,22 +20,22 @@ const job = (event_type: AppointmentEmailJob["event_type"]): AppointmentEmailJob
     modality: "video",
     status: "confirmed",
     timezone: "Asia/Karachi",
-    site_url: "https://openfield.care",
+    site_url: "https://openuproom.com",
   },
 });
 
 test("confirmation email is branded, escaped, and calendar-ready", () => {
   const rendered = renderAppointmentEmail(job("booking_confirmed"));
-  assert.equal(rendered.subject, "Your Openfield appointment is confirmed");
+  assert.equal(rendered.subject, "Your Open Up Room appointment is confirmed");
   assert.match(rendered.html, /A &lt;Client&gt;/);
   assert.doesNotMatch(rendered.html, /A <Client>/);
-  assert.equal(rendered.attachments[0]?.filename, "openfield-ABCD1234.ics");
+  assert.equal(rendered.attachments[0]?.filename, "openuproom-ABCD1234.ics");
   assert.match(rendered.attachments[0]?.content ?? "", /^[A-Za-z0-9+/]+=*$/);
   assert.match(rendered.text, /GMT\+5/);
 });
 
 test("cancellation email does not leave a stale calendar attachment", () => {
   const rendered = renderAppointmentEmail(job("booking_cancelled"));
-  assert.equal(rendered.subject, "Your Openfield appointment was cancelled");
+  assert.equal(rendered.subject, "Your Open Up Room appointment was cancelled");
   assert.equal(rendered.attachments.length, 0);
 });

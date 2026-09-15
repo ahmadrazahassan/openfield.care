@@ -405,7 +405,7 @@ export const FAQ: FaqItem[] = [
   {
     question: "What if I need help right now?",
     answer:
-      "Openfield is not a crisis service and cannot respond immediately. If you need help now, please use the crisis support page, which lists routes to immediate help.",
+      "Open Up Room is not a crisis service and cannot respond immediately. If you need help now, please use the crisis support page, which lists routes to immediate help.",
   },
 ];
 

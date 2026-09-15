@@ -192,10 +192,10 @@ export const TEXTURE = {
 } as const;
 
 export const BRAND = {
-  mark: "/brand/openfield-mark.svg",
-  markLight: "/brand/openfield-mark-light.svg",
-  wordmark: "/brand/openfield-wordmark.svg",
-  wordmarkLight: "/brand/openfield-wordmark-light.svg",
+  mark: "/brand/openuproom-mark.svg",
+  markLight: "/brand/openuproom-mark-light.svg",
+  wordmark: "/brand/openuproom-wordmark.svg",
+  wordmarkLight: "/brand/openuproom-wordmark-light.svg",
   ogDefault: "/brand/og-default.jpg",
   icon512: "/brand/icon-512.png",
   appleTouchIcon: "/brand/apple-touch-icon-180.png",

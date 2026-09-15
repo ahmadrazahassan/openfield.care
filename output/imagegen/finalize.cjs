@@ -21,14 +21,14 @@ const save=m=>{const i=manifest.findIndex(x=>x.path===m.path);if(i>=0)manifest[i
  save({path:'/images/texture/texture-halftone-dots.png',width:1024,height:1024,alt:'Decorative halftone dots.',placeholder:false});
  const alt=Object.fromEntries(manifest.map(m=>[m.path,m.alt]));
  for(const f of fs.readdirSync('public/icons').filter(f=>f.endsWith('.svg')))alt['/icons/'+f]=f.replace('.svg','').replaceAll('-',' ')+' icon';
- for(const f of fs.readdirSync('public/brand').filter(f=>/\.(svg|png|jpg)$/.test(f)))alt['/brand/'+f]=f.startsWith('og-')?'Openfield — Room to think.':f.includes('wordmark')?'Openfield.':'Openfield symbol: a knot unwinding into a straight line.';
+ for(const f of fs.readdirSync('public/brand').filter(f=>/\.(svg|png|jpg)$/.test(f)))alt['/brand/'+f]=f.startsWith('og-')?'Open Up Room — Room to think.':f.includes('wordmark')?'Open Up Room.':'Open Up Room symbol: a knot unwinding into a straight line.';
  fs.writeFileSync(`${dir}/asset-manifest.json`,JSON.stringify(manifest,null,2));
  fs.writeFileSync('content/alt-text.ts','export const altText = '+JSON.stringify(alt,null,2)+' as const;\n');
  fs.writeFileSync('content/image-metadata.ts','export const imageMetadata = '+JSON.stringify(Object.fromEntries(manifest.map(m=>[m.path,m])),null,2)+' as const;\n');
  const problems=[],checks=[];
  const expected=JSON.parse(fs.readFileSync(`${dir}/prompts.json`)).map(j=>j.path).concat('public/images/hero/hero-open-field-mobile.jpg','public/images/texture/texture-halftone-dots.png');
  for(let i=1;i<=5;i++)expected.push(`public/images/team/avatar-0${i}.jpg`);
- const brands=['openfield-wordmark.svg','openfield-wordmark-light.svg','openfield-mark.svg','openfield-mark-light.svg','favicon.svg','favicon-32.png','apple-touch-icon-180.png','icon-512.png','og-default.jpg'];
+ const brands=['openuproom-wordmark.svg','openuproom-wordmark-light.svg','openuproom-mark.svg','openuproom-mark-light.svg','favicon.svg','favicon-32.png','apple-touch-icon-180.png','icon-512.png','og-default.jpg'];
  expected.push(...brands.map(f=>'public/brand/'+f));
  const iconNames=['anxiety','low-mood','burnout','relationships','grief','sleep','trauma','focus','self-esteem','stress','couples','teens','session-video','session-in-person','session-phone','calendar','clock','privacy','notes','growth','breathing','matching','assessment','follow-up'];
  expected.push(...iconNames.map(f=>'public/icons/'+f+'.svg'));

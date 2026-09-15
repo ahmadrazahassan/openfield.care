@@ -18,7 +18,7 @@ export const HOME = {
     statement:
       "We do not change who you are. We help you hear yourself think.",
     statementSub:
-      "Openfield matches you with a licensed therapist, usually within three minutes. Video, phone, or in a room.",
+      "Open Up Room matches you with a licensed therapist, usually within three minutes. Video, phone, or in a room.",
     primaryCta: { label: "Book a session", href: "/book" },
     /** Right-hand stat column. */
     stats: [
@@ -81,9 +81,9 @@ export const HOME = {
   },
 
   forTeams: {
-    eyebrow: "Openfield for teams",
+    eyebrow: "Open Up Room for teams",
     heading: "Mental health cover your team will actually use.",
-    body: "Most workplace schemes go unused because nobody wants to ring a hotline and explain themselves. Openfield gives your people a named therapist and a booking link — the same product we sell to everyone else.",
+    body: "Most workplace schemes go unused because nobody wants to ring a hotline and explain themselves. Open Up Room gives your people a named therapist and a booking link — the same product we sell to everyone else.",
     cta: { label: "See team plans", href: "/for-teams" },
     points: [
       "Sessions booked directly, no referral gate",
@@ -100,7 +100,7 @@ export const HOME = {
 
   bigType: {
     kicker: ["Surely, without a doubt", "it passes. It always has."],
-    word: "openfield",
+    word: "open up room",
     left: "Est. 2026 — Licensed care",
     right: "Room to think",
   },
@@ -136,9 +136,9 @@ export const BOOKING_COPY = {
     "Move or cancel free up to 24 hours before. After that we ask that you let your therapist know.",
   consents: {
     notEmergency:
-      "I understand that Openfield is not an emergency or crisis service.",
+      "I understand that Open Up Room is not an emergency or crisis service.",
     terms: "I agree to the Terms and the Privacy Notice.",
-    marketing: "Send me occasional writing from the Openfield journal.",
+    marketing: "Send me occasional writing from the Open Up Room journal.",
   },
 } as const;
 

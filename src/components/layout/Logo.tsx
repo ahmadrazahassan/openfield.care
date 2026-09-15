@@ -4,7 +4,7 @@ import { SITE } from "@/content/site";
 
 /**
  * The mark: one continuous line entering as a tangled knot and leaving as a
- * flat horizon. Path is the generated vector from public/brand/openfield-mark.svg,
+ * flat horizon. Path is the generated vector from public/brand/openuproom-mark.svg,
  * inlined so it inherits currentColor from whatever surface it sits on.
  */
 export function Mark({ className }: { className?: string }) {
