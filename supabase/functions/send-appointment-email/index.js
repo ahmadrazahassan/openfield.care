@@ -132,6 +132,16 @@ function absoluteUrl(path, siteUrl) {
     return "";
   }
 }
+function googleCalendarUrl(p) {
+  const stamp = (iso) => new Date(iso).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `${p.service} with ${p.therapist}`,
+    dates: `${stamp(p.starts_at)}/${stamp(p.ends_at)}`,
+    details: `Open Up Room appointment. Reference ${p.reference}.`
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
 function firstName(name) {
   return (name ?? "").trim().split(/\s+/)[0] || "there";
 }
@@ -197,7 +207,7 @@ function renderAppointmentEmail(job) {
   const bookUrl = absoluteUrl("/book", siteUrl);
   const crisisUrl = absoluteUrl("/crisis-support", siteUrl);
   const name = firstName(p.name);
-  const action = cancelled ? { label: "Book another time", href: bookUrl } : p.meeting_url && job.event_type !== "booking_received" ? { label: "Join your session", href: p.meeting_url } : { label: "View appointment", href: manageUrl };
+  const action = cancelled ? { label: "Book another time", href: bookUrl } : p.meeting_url && job.event_type !== "booking_received" ? { label: "Join your session", href: p.meeting_url } : p.is_guest === false ? { label: "View appointment", href: manageUrl } : job.event_type === "reminder_1h" ? { label: "", href: "" } : { label: "Add to Google Calendar", href: googleCalendarUrl(p) };
   const rows = [
     ["With", p.therapist],
     ["Session", p.service],

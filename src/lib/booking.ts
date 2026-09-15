@@ -52,6 +52,22 @@ export function formatSlotFull(iso: string, timeZone: string): string {
   return `${formatSlotDate(iso, timeZone)} at ${formatSlotTime(iso, timeZone)}`;
 }
 
+/** "Asia/Karachi (GMT+5)" — the zone name people recognise, plus the offset. */
+export function formatZoneLabel(iso: string, timeZone: string): string {
+  try {
+    const offset = new Intl.DateTimeFormat("en-GB", {
+      timeZone,
+      timeZoneName: "shortOffset",
+    })
+      .formatToParts(new Date(iso))
+      .find((p) => p.type === "timeZoneName")?.value;
+    const name = timeZone.replaceAll("_", " ");
+    return offset ? `${name} (${offset})` : name;
+  } catch {
+    return timeZone;
+  }
+}
+
 /** YYYY-MM-DD in a given zone (not UTC — the calendar is local to the viewer). */
 export function dateKey(d: Date, timeZone: string): string {
   const parts = new Intl.DateTimeFormat("en-CA", {

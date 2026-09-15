@@ -29,6 +29,8 @@ export type AppointmentEmailJob = {
     location_note?: string | null;
     timezone?: string | null;
     site_url?: string | null;
+    /** True when booked without an account. */
+    is_guest?: boolean;
   };
 };
 
@@ -197,6 +199,18 @@ function absoluteUrl(path: string, siteUrl: string): string {
   }
 }
 
+function googleCalendarUrl(p: AppointmentEmailJob["payload"]): string {
+  const stamp = (iso: string) =>
+    new Date(iso).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `${p.service} with ${p.therapist}`,
+    dates: `${stamp(p.starts_at)}/${stamp(p.ends_at)}`,
+    details: `Open Up Room appointment. Reference ${p.reference}.`,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
 function firstName(name: string | null | undefined): string {
   return (name ?? "").trim().split(/\s+/)[0] || "there";
 }
@@ -276,11 +290,17 @@ export function renderAppointmentEmail(job: AppointmentEmailJob): RenderedAppoin
   const crisisUrl = absoluteUrl("/crisis-support", siteUrl);
   const name = firstName(p.name);
 
+  // Guests have no account, so "View appointment" would land them on a login
+  // page. They get the one action that works without signing in.
   const action = cancelled
     ? { label: "Book another time", href: bookUrl }
     : p.meeting_url && job.event_type !== "booking_received"
       ? { label: "Join your session", href: p.meeting_url }
-      : { label: "View appointment", href: manageUrl };
+      : p.is_guest === false
+        ? { label: "View appointment", href: manageUrl }
+        : job.event_type === "reminder_1h"
+          ? { label: "", href: "" }
+          : { label: "Add to Google Calendar", href: googleCalendarUrl(p) };
 
   const rows: [string, string][] = [
     ["With", p.therapist],

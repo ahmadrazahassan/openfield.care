@@ -19,7 +19,11 @@ import {
   MODALITY_LABEL,
   resolveTimezone,
   formatSlotFull,
+  formatSlotDate,
+  formatSlotTime,
+  formatZoneLabel,
 } from "@/lib/booking";
+import { smoothScrollTo } from "@/components/layout/SmoothScroll";
 import { createBooking } from "@/lib/actions/booking";
 import { BookingCalendar } from "./BookingCalendar";
 import type {
@@ -67,6 +71,7 @@ export function BookingFlow({
   const therapistSlug = params.get("therapist");
   const slotStart = params.get("slot");
   const stepParam = params.get("step") as StepKey | null;
+  const [booked, setBooked] = useState(false);
 
   const service = services.find((s) => s.slug === serviceSlug);
   const therapist = therapists.find((t) => t.slug === therapistSlug);
@@ -119,8 +124,9 @@ export function BookingFlow({
 
         <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <StepRail
-            current={step}
-            reachable={reachable}
+            current={booked ? "confirm" : step}
+            reachable={booked ? "confirm" : reachable}
+            locked={booked}
             onJump={(k) => setParams({ step: k })}
           />
 
@@ -171,6 +177,7 @@ export function BookingFlow({
                 prefill={prefill}
                 onBack={() => setParams({ step: "time" })}
                 onConflict={() => setParams({ slot: null, step: "time" })}
+                onBooked={() => setBooked(true)}
               />
             )}
           </div>
@@ -185,15 +192,18 @@ export function BookingFlow({
 function StepRail({
   current,
   reachable,
+  locked = false,
   onJump,
 }: {
   current: StepKey;
   reachable: StepKey;
+  /** After booking there is nothing to go back and change. */
+  locked?: boolean;
   onJump: (k: StepKey) => void;
 }) {
   const order = STEPS.map((s) => s.key);
   const currentIndex = order.indexOf(current);
-  const reachableIndex = order.indexOf(reachable);
+  const reachableIndex = locked ? -1 : order.indexOf(reachable);
 
   return (
     <nav aria-label="Booking progress" className="min-w-0 lg:col-span-3">
@@ -456,6 +466,7 @@ function DetailsStep({
   prefill,
   onBack,
   onConflict,
+  onBooked,
 }: {
   service: ServiceRow;
   therapist: TherapistRow;
@@ -464,10 +475,16 @@ function DetailsStep({
   prefill: { fullName: string; email: string; phone: string } | null;
   onBack: () => void;
   onConflict: () => void;
+  onBooked: () => void;
 }) {
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [done, setDone] = useState<{ reference: string } | null>(null);
+  const [done, setDone] = useState<{
+    reference: string;
+    startsAt: string;
+    endsAt: string;
+    email: string;
+  } | null>(null);
 
   const modalities = service.modalities as SessionModality[];
   const [modality, setModality] = useState<SessionModality>(
@@ -476,24 +493,35 @@ function DetailsStep({
 
   if (done) {
     return (
-      <div>
+      <div aria-live="polite">
         <div className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-pill bg-signal text-ink">
-            <CheckIcon className="h-5 w-5" />
+          <span className="grid h-9 w-9 place-items-center rounded-pill bg-signal text-ink">
+            <CheckIcon className="h-4 w-4" />
           </span>
           <p className="eyebrow text-ink-55">Booked</p>
         </div>
-        <h1 className="mt-6 text-d2">{BOOKING_COPY.success}</h1>
-        <dl className="mt-10 flex flex-col">
-          <Row label="Reference" value={done.reference} />
-          <Row label="Service" value={service.name} />
+        <h1 className="mt-5 text-d3">You are booked in.</h1>
+        <p className="mt-3 measure text-ink-70">
+          We have emailed the details and a calendar file to{" "}
+          <span className="text-ink">{done.email}</span>.
+        </p>
+
+        <dl className="mt-8 rounded-lg border border-ink-12 px-6 py-2">
+          <Row label="Date" value={formatSlotDate(done.startsAt, timezone)} />
+          <Row
+            label="Time"
+            value={`${formatSlotTime(done.startsAt, timezone)} – ${formatSlotTime(done.endsAt, timezone)}`}
+          />
+          <Row label="Time zone" value={formatZoneLabel(done.startsAt, timezone)} />
           <Row label="With" value={therapist.display_name} />
-          <Row label="When" value={formatSlotFull(slotStart, timezone)} />
+          <Row label="Service" value={service.name} />
           <Row label="How" value={MODALITY_LABEL[modality] ?? modality} />
+          <Row label="Reference" value={done.reference} last />
         </dl>
-        <p className="mt-8 text-ink-70">
-          Keep the reference above. You can move or cancel the session by
-          replying to the confirmation email, or by contacting us with it.
+
+        <p className="mt-6 text-sm text-ink-70">
+          To move or cancel, reply to the confirmation email or contact us with
+          your reference. {BOOKING_COPY.cancellationPolicy}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <ButtonLink href="/" arrow>
@@ -503,9 +531,6 @@ function DetailsStep({
             Read the journal
           </ButtonLink>
         </div>
-        <p className="mt-8 text-sm text-ink-55">
-          {BOOKING_COPY.cancellationPolicy}
-        </p>
       </div>
     );
   }
@@ -528,7 +553,16 @@ function DetailsStep({
       });
 
       if (res.ok) {
-        setDone({ reference: res.reference });
+        setDone({
+          reference: res.reference,
+          startsAt: res.startsAt,
+          endsAt: res.endsAt,
+          email: String(formData.get("email") ?? ""),
+        });
+        onBooked();
+        // The form was long and the confirmation is short: without this the
+        // reader is left scrolled past the top of it.
+        requestAnimationFrame(() => smoothScrollTo(0));
         return;
       }
       if (res.code === "conflict") {

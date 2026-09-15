@@ -51,3 +51,15 @@ test("reminders render with their own copy and keep the calendar file", () => {
     assert.equal(rendered.attachments.length, 1);
   }
 });
+
+test("guests are never sent to the account login page", () => {
+  const guest = job("booking_confirmed");
+  guest.payload.is_guest = true;
+  const rendered = renderAppointmentEmail(guest);
+  assert.doesNotMatch(rendered.html, /account\/appointments/);
+  assert.match(rendered.html, /calendar\.google\.com\/calendar\/render\?action=TEMPLATE/);
+
+  const member = job("booking_confirmed");
+  member.payload.is_guest = false;
+  assert.match(renderAppointmentEmail(member).html, /account\/appointments/);
+});

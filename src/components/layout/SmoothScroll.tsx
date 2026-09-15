@@ -33,6 +33,19 @@ export function startSmoothScroll() {
   lenis?.start();
 }
 
+/**
+ * Scroll to a y position through Lenis when it is running, so the two do not
+ * fight; native scroll otherwise (touch, reduced motion).
+ */
+export function smoothScrollTo(top: number) {
+  if (lenis) {
+    lenis.scrollTo(top, { duration: 0.9 });
+    return;
+  }
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
+}
+
 export function SmoothScroll() {
   useEffect(() => {
     const reduced = window.matchMedia(
